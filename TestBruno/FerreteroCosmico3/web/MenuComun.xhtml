@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Menu Principal</title>
+        <script>
+            function Redirect()
+            {
+                setTimeout("location.href='index.xhtml'",3000);
+            }
+        </script>
+    </h:head>
+    <h:body>
+        <h:form rendered="#{CasoLogin.logueado == false}">
+            <h1 align="center">Usted no esta logueado. Acceso Denegado</h1>
+            <body onload="Redirect()"></body>
+        </h:form>
+        <h:form rendered="#{CasoLogin.comun == true}">
+            <h:dataTable>
+                <h:column>
+                    <f:facet name="header">
+                        <h:commandLink value="Home" action="home" />
+                    </f:facet>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:commandLink value="LogOut" action="#{CasoLogin.logOut}" />
+                    </f:facet>
+                </h:column>
+            </h:dataTable>
+        </h:form>
+        <h:form rendered="#{CasoLogin.admin == true}">
+            <h:dataTable>
+                <h:column>
+                    <f:facet name="header">
+                        <h:commandLink value="Home" action="home" />
+                    </f:facet>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:commandLink value="Admin" action="administ" />
+                    </f:facet>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:commandLink value="LogOut" action="#{CasoLogin.logOut()}" />
+                    </f:facet>
+                </h:column>
+            </h:dataTable>
+        </h:form>
+    </h:body>
+    <ui:insert name="contenido" />
+</html>
+

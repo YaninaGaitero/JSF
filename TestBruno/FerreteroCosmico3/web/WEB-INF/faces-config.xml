@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<faces-config version="2.2"
+              xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+<!-- definimos reglas de navegacion -->
+    <navigation-rule>
+        <!-- se consideran todas las peticiones -->
+        <from-view-id>*</from-view-id>
+        <navigation-case>
+            <from-outcome>success</from-outcome>
+            <to-view-id>Home.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>home</from-outcome>
+            <to-view-id>Home.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>failedlogin</from-outcome>
+            <to-view-id>index.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>administ</from-outcome>
+            <to-view-id>Admin.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>logout</from-outcome>
+            <to-view-id>Index.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <managed-bean>
+        <managed-bean-name>CasoLogin</managed-bean-name>
+        <managed-bean-class>Controllers.LogInCase</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>CasoUsuarios</managed-bean-name>
+        <managed-bean-class>Controllers.ListUsersCase</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+</faces-config>
