@@ -7,6 +7,8 @@ package Controllers;
 import DAOs.*;
 import Modelo.*;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author usuario
@@ -26,9 +28,22 @@ public class ListUsersCase
         Lista = ConexionUsuarios.ListaUsuarios();
     }
 
-    public ArrayList getLista() {
-        Usuarios();
-        return Lista;
+    public ArrayList getLista()
+    {
+        try 
+        {
+            ConexionUsuarios.conectar();
+            Usuarios();
+            return Lista;
+        } 
+        catch (Exception ex) {
+            Logger.getLogger(ListUsersCase.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+        finally
+        {
+            ConexionUsuarios.desconectar();
+        }
     }
 
     public void setLista(ArrayList Lista) {

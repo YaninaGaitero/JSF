@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -31,10 +33,6 @@ public class LogInCase
         ConexionUsuarios = new DAOUsuarios();
     }
     
-    public void CerrarConexion ()
-    {
-        ConexionUsuarios.desconectar();
-    }
     
     public boolean getLogueado ()
     {
@@ -56,28 +54,40 @@ public class LogInCase
     
     public String login ()
     {
-        Usuario Log = null;
-        ArrayList users = ConexionUsuarios.ListaUsuarios();
-        Iterator listausers = users.iterator();
-        while (listausers.hasNext())
+        try {
+            ConexionUsuarios.conectar();
+            Usuario Log = null;
+            ArrayList users = ConexionUsuarios.ListaUsuarios();
+            Iterator listausers = users.iterator();
+            while (listausers.hasNext())
+            {
+                Usuario list = (Usuario)listausers.next();
+                if (list.getUser().equals(getUser()) && list.getPass().equals(getPass()))
+                    Log=list;
+            }
+            String answer;
+            if (Log==null)
+            {
+                answer="failedlogin";
+                Error="Usuario y/o contraseña incorrectos";
+            }
+            else
+            {
+                setLogged(Log);
+                answer ="success";
+                Error="";
+            }
+            return answer;
+        } 
+        catch (Exception ex) 
         {
-            Usuario list = (Usuario)listausers.next();
-            if (list.getUser().equals(getUser()) && list.getPass().equals(getPass()))
-                Log=list;
+            Logger.getLogger(LogInCase.class.getName()).log(Level.SEVERE, null, ex);
+            return "failedlogin";
         }
-        String answer;
-        if (Log==null)
+        finally
         {
-            answer="failedlogin";
-            Error="Usuario y/o contraseña incorrectos";
+            ConexionUsuarios.desconectar();
         }
-        else
-        {
-            setLogged(Log);
-            answer ="success";
-            Error="";
-        }
-        return answer;
     }
     
     public String logOut ()
