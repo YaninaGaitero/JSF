@@ -4,16 +4,15 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Alta de Productos</title>
+        <title>Baja y Modificacion de Productos</title>
     </h:head>
     <h:body>
-        <h:form rendered="#{CasoLogIn.comun || !CasoLogIn.logged}">
-            <h1>Usted no Puede Ingresar Aqui. Acceso Denegado.</h1>
-            <h:commandLink value="Salir" action="failed" ></h:commandLink>
+        <h:form rendered="#{CasoLogIn.comun || !CasoLogIn.logged}" >
+            <h1>Usted no esta autorizado a entrar. Acceso Denegado</h1>
+            <h:commandLink value="Salir" action="failed" />
         </h:form>
         <h:form rendered="#{CasoLogIn.admin}">
-            <h1>Alta de Productos</h1>
-            <!-- Aca va la table de productos -->
+            <h1>Baja y Modificacion de Productos</h1>
             <h:dataTable value="#{CasoABMProd.listaProductos()}" var="fila" border="2">
                 <h:column>
                     <f:facet name="header">
@@ -43,53 +42,67 @@
                     <f:facet name="header">
                         <h:outputText value="Precio" />
                     </f:facet>
-                    <h:outputText id="precio" value="#{fila.precio}"><f:convertNumber minFractionDigits="2" /></h:outputText>
+                    <h:outputText id="precio" value="#{fila.precio}">
+                        <f:convertNumber minFractionDigits="2" /></h:outputText>
                 </h:column>
             </h:dataTable>
             <br />
-            <h:messages  />
+            <h:messages />
+            <br />
+            <h:selectOneMenu value="#{CasoABMProd.selectID}" validatorMessage="Elije Un Producto Por favor">
+                <f:selectItem itemLabel="Elije Un Producto" itemValue="0" />
+                <f:selectItems value="#{CasoABMProd.listaProductos()}" var="opt" itemLabel="#{opt.nombre}" itemValue="#{opt.id}">
+                </f:selectItems>
+                <f:validateLongRange minimum="1" />
+            </h:selectOneMenu>
             <br />
             <table>
                 <tr>
                     <td>Nombre:</td>
                     <td>
-                        <h:inputText value="#{CasoABMProd.aggNombre}" required="true" requiredMessage="Ingrese Nombre del Producto" />
+                        <h:inputText value="#{CasoABMProd.modNombre}"></h:inputText>
                     </td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td>Descripcion:</td>
                     <td>
-                        <h:inputText value="#{CasoABMProd.aggDescripcion}" />
+                        <h:inputText value="#{CasoABMProd.modDescripcion}"></h:inputText>
                     </td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td>Stock:</td>
                     <td>
-                        <h:inputText value="#{CasoABMProd.aggStock}" required="true" validatorMessage="Ingrese un valor mayor a cero">
-                            <f:validateLongRange minimum="0"  />   
+                        <h:inputText value="#{CasoABMProd.modStock}" validatorMessage="Ingrese un Stock Mayor a 0">
+                            
                         </h:inputText>
                     </td>
+                    <td><h:selectBooleanCheckbox value="#{CasoABMProd.mustStock}" >Modificar</h:selectBooleanCheckbox></td>
                 </tr>
                 <tr>
                     <td>Precio:</td>
                     <td>
-                        <h:inputText value="#{CasoABMProd.aggPrecio}" >
-                            <f:convertNumber minFractionDigits="2" />
-                            <f:validateLongRange minimum="0" />
+                        <h:inputText value="#{CasoABMProd.modPrecio}" validatorMessage="Ingrese un Precio Mayor a 0">
+                            
                         </h:inputText>
                     </td>
+                    <td><h:selectBooleanCheckbox value="#{CasoABMProd.mustPrecio}">Modificar</h:selectBooleanCheckbox></td>
                 </tr>
                 <tr>
                     <td>Estado:</td>
                     <td>
-                        <h:inputText value="#{CasoABMProd.aggEstado}" required="true">
-                            <f:validateLongRange minimum="0" maximum="1" />
-                        </h:inputText>
+                        <h:selectOneMenu value="#{CasoABMProd.modEstado}">
+                            <f:selectItem itemLabel="Elije un Estado" itemValue="2" />
+                            <f:selectItem itemLabel="ACTIVO" itemValue="1" />
+                            <f:selectItem itemLabel="NO ACTIVO" itemValue="0" />
+                        </h:selectOneMenu>
                     </td>
                 </tr>
             </table>
             <br />
-            <h:commandButton value="Ingresar" action="#{CasoABMProd.altaProducto()}" />
+            <br />
+            <h:commandButton value="Modificar" action="#{CasoABMProd.modifProducto()}" />
         </h:form>
     </h:body>
 </html>

@@ -24,6 +24,15 @@ public class ControladoraABMProds
     private int AggStock;
     private float AggPrecio;
     private int AggEstado;
+    
+    private String ModNombre;
+    private String ModDescripcion;
+    private int ModStock;
+    private boolean MustStock;
+    private float ModPrecio;
+    private boolean MustPrecio;
+    private int ModEstado;
+    private int SelectID;
 
     public ControladoraABMProds() throws Exception 
     {
@@ -61,6 +70,53 @@ public class ControladoraABMProds
         } catch (Exception ex) {
             Logger.getLogger(ControladoraABMProds.class.getName()).log(Level.SEVERE, null, ex);
             return "failed";
+        }
+    }
+    
+    public String modifProducto()
+    {
+        try {
+            String answer="modifprod";
+            Producto modif=null;
+            Enumeration listu = ConexionProductos.ListaProductos().elements();
+            while (listu.hasMoreElements())
+            {
+                Producto p = (Producto)listu.nextElement();
+                if (p.getId()==SelectID)
+                    modif = p;
+            }
+            if (!"".equals(ModNombre))
+            {
+                modif.setNombre(ModNombre);
+            }
+            if (!"".equals(ModDescripcion))
+            {
+                modif.setDescripcion(ModDescripcion);
+            }
+            if (MustStock)
+            {
+                modif.setStock(ModStock);
+            }
+            if (MustPrecio)
+            {
+                modif.setPrecio(ModPrecio);
+            }
+            if (ModEstado!=2)
+            {
+                modif.setEstado(ModEstado);
+            }
+            ConexionProductos.modificarProducto(modif);
+            return answer;
+        } catch (Exception ex) {
+            Logger.getLogger(ControladoraABMProds.class.getName()).log(Level.SEVERE, null, ex);
+            return "failed";
+        }
+        finally {
+            setModDescripcion("");
+            setModEstado(2);
+            setModNombre("");
+            setModStock(0);
+            setModPrecio(0);
         }
     }
 
@@ -102,6 +158,70 @@ public class ControladoraABMProds
 
     public void setAggEstado(int AggEstado) {
         this.AggEstado = AggEstado;
+    }
+
+    public int getSelectID() {
+        return SelectID;
+    }
+
+    public void setSelectID(int SelectID) {
+        this.SelectID = SelectID;
+    }
+
+    public String getModNombre() {
+        return ModNombre;
+    }
+
+    public void setModNombre(String ModNombre) {
+        this.ModNombre = ModNombre;
+    }
+
+    public String getModDescripcion() {
+        return ModDescripcion;
+    }
+
+    public void setModDescripcion(String ModDescripcion) {
+        this.ModDescripcion = ModDescripcion;
+    }
+
+    public int getModStock() {
+        return ModStock;
+    }
+
+    public void setModStock(int ModStock) {
+        this.ModStock = ModStock;
+    }
+
+    public float getModPrecio() {
+        return ModPrecio;
+    }
+
+    public void setModPrecio(float ModPrecio) {
+        this.ModPrecio = ModPrecio;
+    }
+
+    public int getModEstado() {
+        return ModEstado;
+    }
+
+    public void setModEstado(int ModEstado) {
+        this.ModEstado = ModEstado;
+    }
+
+    public boolean isMustStock() {
+        return MustStock;
+    }
+
+    public void setMustStock(boolean MustStock) {
+        this.MustStock = MustStock;
+    }
+
+    public boolean isMustPrecio() {
+        return MustPrecio;
+    }
+
+    public void setMustPrecio(boolean MustPrecio) {
+        this.MustPrecio = MustPrecio;
     }
     
     
