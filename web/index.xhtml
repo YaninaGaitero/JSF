@@ -4,48 +4,16 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html">
     <h:head>
         <title>Facelet Title</title>
-        <script type="text/javascript">
-            function ValidaUsr()
-            {
-                if (document.getElementById('Nombre').value.length < 4)
-                {
-                    alert('El nombre debe tener mas de 4 caracteres');
-                    document.getElementById('Nombre').focus();
-                    return false;
-                }
-            }
-            function Validar() {
-                if (formulario.usuario.value == '')
-                {
-                    alert('El nombre de usuario no puede estar vacio');
-                    exit();
-                }
-                if (formulario.password.value == '')
-                {
-                    alert('La contraseña no puede estar vacia');
-                    exit();
-                }
-                formulario.submit();
-            }
-        </script>
     </h:head>
     <h:body>
-        <div class="container">
-            <section id="content">
-                <form name ='formulario' action='LogueoSesion.jsp'  method ='POST'>
-                    <h1>FERRETERIA ANTUNEZ</h1> 
-                    Usuario: <h:inputText value="" />
-                    <div>
-                        <input placeholder="Contraseña" required="" name ="password" id="password" type="password"/>
-                    </div>
-                    <div>
-                        <input type ='button' onClick='javascript:Validar();' value ='Login' />
-
-                        <a href='RegistrarUsuario.jsp'>Registrarme</a>
-                    </div>
-                </form><!-- form -->
-            </section><!-- content -->
-        </div><!-- container -->
+        <h:form>
+            <h1>Ingreso al Sistema</h1>
+            <p>Usuario: <h:inputText id="usuario" value="#{CasoLogIn.nombre}" /></p>
+            <p>Password: <h:inputSecret id="password" value="#{CasoLogIn.pass}" /></p>
+            <br />
+            <br />
+            <h:commandButton value="Ingresar" action="#{CasoLogIn.logIn()}" />
+        </h:form>
     </h:body>
 </html>
 

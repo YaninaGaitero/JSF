@@ -25,7 +25,8 @@ import java.util.LinkedList;
  */
 public class DatosUsuario extends BBDD {
 
-    public DatosUsuario() throws Exception {
+    public DatosUsuario() throws Exception 
+    {
 
         super();
 
@@ -58,7 +59,8 @@ public class DatosUsuario extends BBDD {
         }
     }
 
-    public Hashtable TrearUsuariosT() throws Exception {
+    public Hashtable TrearUsuariosT() throws Exception 
+    {
         try {
             Conectar();
 
@@ -85,7 +87,8 @@ public class DatosUsuario extends BBDD {
 
             }
             return Lista;
-        } finally {
+        } 
+        finally {
             Desconectar();
         }
     }
