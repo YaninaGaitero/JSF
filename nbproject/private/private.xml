@@ -3,11 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/usuario/Desktop/Bruno/Facultad/JSF/web/Home.xhtml</file>
-            <file>file:/C:/Users/usuario/Desktop/Bruno/Facultad/JSF/web/BajaYModifProds.xhtml</file>
-            <file>file:/C:/Users/usuario/Desktop/Bruno/Facultad/JSF/src/java/BD/DatosProductos.java</file>
-            <file>file:/C:/Users/usuario/Desktop/Bruno/Facultad/JSF/src/java/Controladora/ControladoraABMProds.java</file>
-            <file>file:/C:/Users/usuario/Desktop/Bruno/Facultad/JSF/web/AltaProductos.xhtml</file>
+            <file>file:/C:/Users/Ezequiel/Documents/GitHub/JSF/src/java/Controladora/ControladoraCompra.java</file>
+            <file>file:/C:/Users/Ezequiel/Documents/GitHub/JSF/web/BajaYModifProds.xhtml</file>
+            <file>file:/C:/Users/Ezequiel/Documents/GitHub/JSF/web/Menu.xhtml</file>
+            <file>file:/C:/Users/Ezequiel/Documents/GitHub/JSF/web/index.xhtml</file>
+            <file>file:/C:/Users/Ezequiel/Documents/GitHub/JSF/src/java/Controladora/ControladoraABMProds.java</file>
+            <file>file:/C:/Users/Ezequiel/Documents/GitHub/JSF/src/java/Controladora/ControladoraLogin.java</file>
+            <file>file:/C:/Users/Ezequiel/Documents/GitHub/JSF/src/java/Controladora/ControladoraFactura.java</file>
+            <file>file:/C:/Users/Ezequiel/Documents/GitHub/JSF/web/Home.xhtml</file>
+            <file>file:/C:/Users/Ezequiel/Documents/GitHub/JSF/src/java/Controladora/ControladoraPiqueo.java</file>
+            <file>file:/C:/Users/Ezequiel/Documents/GitHub/JSF/src/java/Controladora/ControladoraProductos.java</file>
         </group>
     </open-files>
 </project-private>
