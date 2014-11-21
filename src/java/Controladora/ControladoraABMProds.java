@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.faces.event.AjaxBehaviorEvent;
 
 /**
  *
@@ -25,15 +26,13 @@ public class ControladoraABMProds
     private float AggPrecio;
     private int AggEstado;
     
-    private String ModNombre;
-    private String ModDescripcion;
-    private int ModStock;
-    private boolean MustStock;
-    private float ModPrecio;
-    private boolean MustPrecio;
-    private int ModEstado;
+    private Producto adding;
+    private Producto modify;
+    
     private int SelectID;
-
+    private boolean MustStock;
+    private boolean MustPrecio;
+    
     public ControladoraABMProds() throws Exception 
     {
         ConexionProductos = new DatosProductos();
@@ -61,16 +60,29 @@ public class ControladoraABMProds
     
     public String altaProducto()
     {
-        try {
+        try 
+        {
             String answer="altaprod";
             //El Codigo de Ingreso de Productos.
-            Producto add = new Producto(0,AggNombre,AggDescripcion,AggStock,AggPrecio,AggEstado);
+            Producto add = new Producto(0,getAdding().getNombre(),getAdding().getDescripcion(),getAdding().getStock(),getAdding().getPrecio(),getAdding().getEstado());
             ConexionProductos.altaProducto(add);
             return answer;
-        } catch (Exception ex) {
+        } 
+        catch (Exception ex) {
             Logger.getLogger(ControladoraABMProds.class.getName()).log(Level.SEVERE, null, ex);
             return "failed";
         }
+    }
+    
+    public void selectEvent(AjaxBehaviorEvent E)
+    {
+            Enumeration listu = ConexionProductos.ListaProductos().elements();
+            while (listu.hasMoreElements())
+            {
+                Producto p = (Producto)listu.nextElement();
+                if (p.getId()==SelectID)
+                    setModify(p);
+            }
     }
     
     public String modifProducto()
@@ -85,25 +97,25 @@ public class ControladoraABMProds
                 if (p.getId()==SelectID)
                     modif = p;
             }
-            if (!"".equals(ModNombre))
+            if (!"".equals(modify.getNombre()))
             {
-                modif.setNombre(ModNombre);
+                modif.setNombre(modify.getNombre());
             }
-            if (!"".equals(ModDescripcion))
+            if (!"".equals(modify.getDescripcion()))
             {
-                modif.setDescripcion(ModDescripcion);
+                modif.setDescripcion(modify.getDescripcion());
             }
             if (MustStock)
             {
-                modif.setStock(ModStock);
+                modif.setStock(modify.getStock());
             }
             if (MustPrecio)
             {
-                modif.setPrecio(ModPrecio);
+                modif.setPrecio(modify.getPrecio());
             }
-            if (ModEstado!=2)
+            if (modify.getEstado()!=2)
             {
-                modif.setEstado(ModEstado);
+                modif.setEstado(modify.getEstado());
             }
             ConexionProductos.modificarProducto(modif);
             return answer;
@@ -112,11 +124,7 @@ public class ControladoraABMProds
             return "failed";
         }
         finally {
-            setModDescripcion("");
-            setModEstado(2);
-            setModNombre("");
-            setModStock(0);
-            setModPrecio(0);
+            modify = new Producto();
         }
     }
 
@@ -168,45 +176,14 @@ public class ControladoraABMProds
         this.SelectID = SelectID;
     }
 
-    public String getModNombre() {
-        return ModNombre;
+    public Producto getModify() {
+        return modify;
     }
 
-    public void setModNombre(String ModNombre) {
-        this.ModNombre = ModNombre;
+    public void setModify(Producto Mod) {
+        this.modify = Mod;
     }
-
-    public String getModDescripcion() {
-        return ModDescripcion;
-    }
-
-    public void setModDescripcion(String ModDescripcion) {
-        this.ModDescripcion = ModDescripcion;
-    }
-
-    public int getModStock() {
-        return ModStock;
-    }
-
-    public void setModStock(int ModStock) {
-        this.ModStock = ModStock;
-    }
-
-    public float getModPrecio() {
-        return ModPrecio;
-    }
-
-    public void setModPrecio(float ModPrecio) {
-        this.ModPrecio = ModPrecio;
-    }
-
-    public int getModEstado() {
-        return ModEstado;
-    }
-
-    public void setModEstado(int ModEstado) {
-        this.ModEstado = ModEstado;
-    }
+    
 
     public boolean isMustStock() {
         return MustStock;
@@ -223,6 +200,23 @@ public class ControladoraABMProds
     public void setMustPrecio(boolean MustPrecio) {
         this.MustPrecio = MustPrecio;
     }
+
+    /**
+     * @return the adding
+     */
+    public Producto getAdding() {
+        return adding;
+    }
+
+    /**
+     * @param adding the adding to set
+     */
+    public void setAdding(Producto adding) {
+        this.adding = adding;
+    }
+
+
+
     
     
 }

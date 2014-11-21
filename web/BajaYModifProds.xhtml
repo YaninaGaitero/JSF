@@ -2,108 +2,121 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <title>Baja y Modificacion de Productos</title>
+        <h:outputScript>
+            function Invalido()
+            {
+                alert('Usted no puede Ingresar aca');
+                location.href('faces/index.xhtml');
+            }
+        </h:outputScript>                   
     </h:head>
     <h:body>
-        <h:form rendered="#{CasoLogIn.comun || !CasoLogIn.logged}" >
-            <h1>Usted no esta autorizado a entrar. Acceso Denegado</h1>
-            <h:commandLink value="Salir" action="failed" />
-        </h:form>
-        <h:form rendered="#{CasoLogIn.admin}">
-            <h1>Baja y Modificacion de Productos</h1>
-            <h:dataTable value="#{CasoABMProd.listaProductos()}" var="fila" border="2">
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="ID Producto" />
-                    </f:facet>
-                    <h:outputText id="id_prod" value="#{fila.id}" />
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Nombre" />
-                    </f:facet>
-                    <h:outputText id="nombre" value="#{fila.nombre}" />
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Descripcion" />
-                    </f:facet>
-                    <h:outputText id="descripcion" value="#{fila.descripcion}" />
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Stock" />
-                    </f:facet>
-                    <h:outputText id="Stock" value="#{fila.stock}" />
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Precio" />
-                    </f:facet>
-                    <h:outputText id="precio" value="#{fila.precio}">
-                        <f:convertNumber minFractionDigits="2" /></h:outputText>
-                </h:column>
-            </h:dataTable>
-            <br />
-            <h:messages />
-            <br />
-            <h:selectOneMenu value="#{CasoABMProd.selectID}" validatorMessage="Elije Un Producto Por favor">
-                <f:selectItem itemLabel="Elije Un Producto" itemValue="0" />
-                <f:selectItems value="#{CasoABMProd.listaProductos()}" var="opt" itemLabel="#{opt.nombre}" itemValue="#{opt.id}">
-                </f:selectItems>
-                <f:validateLongRange minimum="1" />
-            </h:selectOneMenu>
-            <br />
-            <table>
-                <tr>
-                    <td>Nombre:</td>
-                    <td>
-                        <h:inputText value="#{CasoABMProd.modNombre}"></h:inputText>
-                    </td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>Descripcion:</td>
-                    <td>
-                        <h:inputText value="#{CasoABMProd.modDescripcion}"></h:inputText>
-                    </td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>Stock:</td>
-                    <td>
-                        <h:inputText value="#{CasoABMProd.modStock}" validatorMessage="Ingrese un Stock Mayor a 0">
-                            
-                        </h:inputText>
-                    </td>
-                    <td><h:selectBooleanCheckbox value="#{CasoABMProd.mustStock}" >Modificar</h:selectBooleanCheckbox></td>
-                </tr>
-                <tr>
-                    <td>Precio:</td>
-                    <td>
-                        <h:inputText value="#{CasoABMProd.modPrecio}" validatorMessage="Ingrese un Precio Mayor a 0">
-                            
-                        </h:inputText>
-                    </td>
-                    <td><h:selectBooleanCheckbox value="#{CasoABMProd.mustPrecio}">Modificar</h:selectBooleanCheckbox></td>
-                </tr>
-                <tr>
-                    <td>Estado:</td>
-                    <td>
-                        <h:selectOneMenu value="#{CasoABMProd.modEstado}">
-                            <f:selectItem itemLabel="Elije un Estado" itemValue="2" />
-                            <f:selectItem itemLabel="ACTIVO" itemValue="1" />
-                            <f:selectItem itemLabel="NO ACTIVO" itemValue="0" />
-                        </h:selectOneMenu>
-                    </td>
-                </tr>
-            </table>
-            <br />
-            <br />
-            <h:commandButton value="Modificar" action="#{CasoABMProd.modifProducto()}" />
-        </h:form>
+        <ui:composition template="Menu.xhtml">
+            <ui:define name="contenido">
+                <h:form rendered="#{CasoLogIn.comun || !CasoLogIn.logged}" >
+                    <h1>Usted no esta autorizado a entrar. Acceso Denegado</h1>
+                    <h:commandLink value="Salir" action="failed" />
+                    
+                </h:form>
+                <h:form rendered="#{CasoLogIn.admin}">
+                    <h1>Baja y Modificacion de Productos</h1>
+                    <h:dataTable value="#{jSFControladoraABMProds.listaProductos()}" var="fila" border="2">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="ID Producto" />
+                            </f:facet>
+                            <h:outputText id="id_prod" value="#{fila.id}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Nombre" />
+                            </f:facet>
+                            <h:outputText id="nombre" value="#{fila.nombre}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Descripcion" />
+                            </f:facet>
+                            <h:outputText id="descripcion" value="#{fila.descripcion}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Stock" />
+                            </f:facet>
+                            <h:outputText id="Stock" value="#{fila.stock}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Precio" />
+                            </f:facet>
+                            <h:outputText id="precio" value="#{fila.precio}">
+                                <f:convertNumber minFractionDigits="2" /></h:outputText>
+                        </h:column>
+                    </h:dataTable>
+                    <br />
+                    <h:messages />
+                    <br />
+                    <h:selectOneMenu value="#{jSFControladoraABMProds.selectID}">
+                        <f:selectItems value="#{jSFControladoraABMProds.listaProductos()}" var="opt" itemLabel="#{opt.nombre}" itemValue="#{opt.id}">
+                        </f:selectItems>
+                        <f:ajax event="click" listener="#{jSFControladoraABMProds.selectEvent(E)}"  render="names descript stok price status" ></f:ajax>
+                    </h:selectOneMenu>
+                    <br />
+                    <table>
+                        <tr>
+                            <td>Nombre:</td>
+                            <td>
+                                <h:inputText id="names" value="#{jSFControladoraABMProds.modify.nombre}"></h:inputText>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td>Descripcion:</td>
+                            <td>
+                                <h:inputText id="descript" value="#{jSFControladoraABMProds.modify.descripcion}"></h:inputText>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td>Stock:</td>
+                            <td>
+                                <h:inputText id="stok" value="#{jSFControladoraABMProds.modify.stock}" validatorMessage="Ingrese un Stock Mayor a 0">
+                                    <f:validateLongRange minimum="0" />
+                                    <f:convertNumber integerOnly="true" />
+                                </h:inputText>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Precio:</td>
+                            <td>
+                                <h:inputText id="price" value="#{jSFControladoraABMProds.modify.precio}" validatorMessage="Ingrese un Precio Mayor a 0" >
+                                    <f:validateLongRange minimum="0" />
+                                    <f:convertNumber minFractionDigits="2" />
+                                </h:inputText>
+                            </td>     
+                        </tr>
+                        <tr>
+                            <td>Estado:</td>
+                            <td>
+                                <h:selectOneMenu id="status" value="#{jSFControladoraABMProds.modify.estado}" validatorMessage="Elije Un estado">
+                                    <f:selectItem itemLabel="Elije un Estado" itemValue="2" />
+                                    <f:selectItem itemLabel="ACTIVO" itemValue="1" />
+                                    <f:selectItem itemLabel="NO ACTIVO" itemValue="0" />
+                                    <f:validateLongRange minimum="0" maximum="1" />
+                                </h:selectOneMenu>
+                            </td>
+                        </tr>
+                    </table>
+                    <br />
+                    <br />
+                    <h:commandButton value="Modificar" action="#{jSFControladoraABMProds.modifProducto()}" />
+                </h:form>
+            </ui:define>
+        </ui:composition>
     </h:body>
 </html>
 
