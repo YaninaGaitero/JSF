@@ -19,9 +19,8 @@ public class Compra {
     private Date fecha;
     private int estado;
     private DaoFacturas bd;
-    /**
-     * @return the idCompra
-     */
+    
+    
     public Compra (){}
     
     public Compra ( int idu, Date fec, int estado)
@@ -41,7 +40,9 @@ public class Compra {
        
     }
     
-    
+    /**
+     * @return the idCompra
+     */
     public int getIdCompra() {
          return idCompra;
     }

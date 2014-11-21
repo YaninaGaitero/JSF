@@ -15,8 +15,8 @@
                 </h:form>
                 <h:form rendered="#{CasoLogIn.logged}">
                     <h1>Historial de Compras</h1>
-                    <h:selectOneListbox>
-                        <f:selectItems value="" var="facturas" itemLabel="" />
+                    <h:selectOneListbox size="1">
+                        <f:selectItems value="#{controladoraHistCompraJSF.CabecerasFact(CasoLogIn.userlog)}" var="facturas" itemLabel="#{facturas.fecha}" itemValue="#{facturas.idCompra}" />
                     </h:selectOneListbox>
                 </h:form>
             </ui:define>

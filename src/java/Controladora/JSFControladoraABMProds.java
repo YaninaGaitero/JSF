@@ -37,8 +37,6 @@ public class JSFControladoraABMProds {
     private Producto modify = new Producto();
     private Producto adding = new Producto();
     private int SelectID;
-    private boolean MustStock;
-    private boolean MustPrecio;
     
     public ArrayList listaProductos()
     {
