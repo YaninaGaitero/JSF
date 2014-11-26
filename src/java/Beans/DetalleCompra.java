@@ -31,6 +31,13 @@ public class DetalleCompra {
         
        
     }
+    
+    public float subTotal()
+    {
+        float result;
+        result = precio*(cantidad*1.0f);
+        return result;
+    }
 
     /**
      * @return the idDetalle
