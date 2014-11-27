@@ -1,0 +1,78 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 27/11/2014, 18:47:40
+    Author     : alumno
+*/
+
+body
+{
+    background-color: #8BB9C7;
+    font-family: sans-serif;
+}
+
+.menu{display:block;}
+
+.menu li{display: inline-block;
+         position: relative;
+         z-index:100;}
+
+.menu li a {font-weight:600;
+            text-decoration:none;
+            padding:11px;
+            display:block;
+            color:#ffffff;
+
+            -webkit-transition: all 0.2s ease-in-out 0s;
+            -moz-transition: all 0.2s ease-in-out 0s;
+            -o-transition: all 0.2s ease-in-out 0s;
+            -ms-transition: all 0.2s ease-in-out 0s;
+            transition: all 0.2s ease-in-out 0s;
+}
+
+.menu li a:hover, .menu li:hover > a{color:#ffffff;
+                                     background:#7C96B7;}
+
+/* hide the second level menu */
+.menu ul {display: none;
+          margin: 0;
+          padding: 0;
+          width: 150px;
+          position: absolute;
+          top: 43px;
+          left: 0px;
+          background: #ffffff;
+}
+
+/* display second level menu on hover */
+.menu li:hover > ul{ display: block;}
+
+.menu ul li {display:block;
+             float: none;
+             background:none;
+             margin:0;
+             padding:0;
+             
+}
+
+.menu ul li a {font-size:12px;
+               font-weight:normal;
+               display:block;
+               color:#797979;
+               border-left:3px solid #ffffff;
+               background: #f0f0f0;} //color de submenus
+
+.menu ul li a:hover, .menu ul li:hover > a{
+    background:#f0f0f0;
+    border-left:3px solid #9CA3DA;
+    color:#7C96B7;
+}
+
+/* change level 3 menu positions */
+.menu ul ul {left: 149px;
+             top: 0px;
+             background: #7C96B7;
+}
