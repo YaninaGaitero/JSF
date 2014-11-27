@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>ABM de Usuarios</title>
+        <h:outputStylesheet>
+            #marco
+            { 
+                position:absolute;
+            }
+            #listado
+            {
+                float:left;
+                width:50%;
+                height:100%;
+            }
+            #altauser
+            {
+                float:left;
+                width:50%;
+                height:50%;
+            }
+        </h:outputStylesheet>
+    </h:head>
+    <h:body>
+        <ui:composition template="Menu.xhtml">
+            <ui:define name="contenido">
+                <h:form rendered="#{CasoLogIn.comun || !CasoLogIn.logged}">
+                    <h1>Usted no Puede Ingresar Aqui. Acceso Denegado.</h1>
+                    <h:commandLink value="Salir" action="failed" ></h:commandLink>
+                </h:form>
+                <h:form rendered="#{CasoLogIn.admin}">
+                    <div id="marco">
+                        <div id="listado">
+                            <h1>Lista de Usuarios</h1>
+                            <br />
+                            <br />
+                            <h:dataTable border="3" value="#{abmUsuariosJSF.listaUsuarios()}" var="users">
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="ID" />
+                                    </f:facet>
+                                    <h:outputText value="#{users.id}" />
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Nombre" />
+                                    </f:facet>
+                                    <h:outputText value="#{users.nombre}" />
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Apellido" />
+                                    </f:facet>
+                                    <h:outputText value="#{users.apellido}" />
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Documento" />
+                                    </f:facet>
+                                    <h:outputText value="#{users.documento}" />
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Telefono" />
+                                    </f:facet>
+                                    <h:outputText value="#{users.telefono}" />
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Direccion" />
+                                    </f:facet>
+                                    <h:outputText value="#{users.direccion}" />
+                                </h:column>
+                            </h:dataTable>
+                        </div>
+                        <div id="altauser">
+                            <h1>Alta de Usuarios</h1>
+                        </div>
+                    </div>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+
