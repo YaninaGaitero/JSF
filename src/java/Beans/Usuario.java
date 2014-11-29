@@ -90,8 +90,21 @@ public class Usuario {
     }
     
     
+    public String tipoUsuario()
+    {
+        if (getNivel()==1)
+            return "Administrador";
+        else
+            return "Comun";
+    }
     
-    
+    public String activo()    
+    {
+        if(getEstado()==1)
+            return "Activo";
+        else
+            return "No Activo";
+    }
             
             /**
      * @return the nombre
