@@ -9,11 +9,13 @@
         <script>
             function Redirect()
             {
-                setTimeout("location.href='index.xhtml'",3000);
+                setTimeout("location.href='index.xhtml'", 3000);
             }
         </script>
     </h:head>
     <h:body>
+        <!-- Este formulario se renderiza en caso de que el Usuario sea Comun.
+        La validacion de acceso se encuentra en las respectivas paginas. -->
         <h:form rendered="#{CasoLogIn.comun == true}">
             <h:dataTable border="1">
                 <h:column>
@@ -26,15 +28,16 @@
                         <h:commandLink value="Ver Compras" action="histcompras" />
                     </f:facet>
                 </h:column>
-                
                 <h:column>
                     <f:facet name="header">
                         <h:commandLink value="LogOut" action="#{CasoLogIn.logOut()}" />
                     </f:facet>
                 </h:column>
-            </h:dataTable>       
+            </h:dataTable>
         </h:form>
-        <h:form rendered="#{CasoLogIn.admin == true}">
+        <!-- Este formulario se renderiza en caso de que el Usuario
+        sea un Administrador -->
+        <h:form rendered="#{CasoLogIn.admin == true}" style="width:100%">
             <h:dataTable border="1">
                 <h:column>
                     <f:facet name="header">
@@ -63,7 +66,8 @@
                 </h:column>
             </h:dataTable>
         </h:form>
-    </h:body>
+        <ui:insert name="contenido" />
+    </h:body> 
     <ui:insert name="contenido" />
 </html>
 
