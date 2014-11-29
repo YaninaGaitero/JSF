@@ -25,13 +25,11 @@ import java.util.LinkedList;
  */
 public class DatosUsuario extends BBDD {
 
-    public DatosUsuario() throws Exception 
-    {
+    public DatosUsuario() throws Exception {
 
         super();
 
     }
-    
 
     public Usuario Logueo(String usuario, String pass) throws Exception {
         try {
@@ -59,8 +57,7 @@ public class DatosUsuario extends BBDD {
         }
     }
 
-    public Hashtable TrearUsuariosT() throws Exception 
-    {
+    public Hashtable TrearUsuariosT() throws Exception {
         try {
             Conectar();
 
@@ -87,8 +84,7 @@ public class DatosUsuario extends BBDD {
 
             }
             return Lista;
-        } 
-        finally {
+        } finally {
             Desconectar();
         }
     }
@@ -211,6 +207,24 @@ public class DatosUsuario extends BBDD {
         }
     }
 
+    public void ModificarUsuario(Usuario modify) throws Exception {
+        try {
+            Conectar();
+            String sql = "update Usuarios "
+                    + "set nombre='" + modify.getNombre() + "', "
+                    + "apellido='" + modify.getApellido() + "', "
+                    + "direccion='" + modify.getDireccion() + "', "
+                    + "documento=" + modify.getDocumento() + ", "
+                    + "estado=" + modify.getEstado() + ", "
+                    + "telefono=" + modify.getTelefono() + " "
+                    + "where id=" + modify.getId();
+            PreparedStatement ps = CrearSentencia(sql);
+            Actualizar(ps);
+        } finally {
+            Desconectar();
+        }
+    }
+
     public Hashtable TraerComprasCliente(int id) throws Exception {
         try {
             Conectar();
@@ -281,7 +295,7 @@ public class DatosUsuario extends BBDD {
 
     }
 
-    public Hashtable traerComprasPendientes () throws Exception{
+    public Hashtable traerComprasPendientes() throws Exception {
         try {
             Conectar();
             Hashtable tabla = new Hashtable();
@@ -293,7 +307,7 @@ public class DatosUsuario extends BBDD {
                 int iduser = rows.getInt("idUsuario");
                 Date fe = rows.getDate("fecha");
                 int estado = rows.getInt("estado");
-                Compra aux = new Compra(idCompra,iduser, fe, estado);
+                Compra aux = new Compra(idCompra, iduser, fe, estado);
                 tabla.put(aux.getIdCompra(), aux);
             }
             return tabla;
@@ -302,10 +316,11 @@ public class DatosUsuario extends BBDD {
         }
 
     }
-     public Compra traerCompraBYid (int id) throws Exception{
+
+    public Compra traerCompraBYid(int id) throws Exception {
         try {
             Conectar();
-            String sql = "SELECT * FROM compra   where id = "+ id;
+            String sql = "SELECT * FROM compra   where id = " + id;
             PreparedStatement sent = CrearSentencia(sql);
             ResultSet rows = Consultar(sent);
             Compra aux;
@@ -315,7 +330,7 @@ public class DatosUsuario extends BBDD {
                 int iduser = rows.getInt("idUsuario");
                 Date fe = rows.getDate("fecha");
                 int estado = rows.getInt("estado");
-                aux = new Compra(idCompra,iduser, fe, estado);
+                aux = new Compra(idCompra, iduser, fe, estado);
             }
             return aux;
         } finally {
@@ -323,31 +338,30 @@ public class DatosUsuario extends BBDD {
         }
 
     }
-   
+
     /*public Hashtable TraerDetallesPendientes() throws Exception {
-        try {
-            Conectar();
-            Hashtable tabla = new Hashtable();
-            String sql = "SELECT * FROM detallecompra  d inner join compra c on d.id_compra = c.id where c.estado = 1";
-            PreparedStatement sent = CrearSentencia(sql);
-            ResultSet rows = Consultar(sent);
-            while (rows.next()) {
-                int det = rows.getInt("id_detalle");
-                int comp = rows.getInt("id_compra");
-                float prec = rows.getFloat("precio");
-                int idprod = rows.getInt("id_producto");
-                int cant = rows.getInt("cantidad");
-                DetalleCompra aux = new DetalleCompra(comp, prec, idprod, cant);
-                aux.setIdDetalle(det);
-                tabla.put(aux.getIdProd(), aux);
-            }
-            return tabla;
-        } finally {
-            Desconectar();
-        }
+     try {
+     Conectar();
+     Hashtable tabla = new Hashtable();
+     String sql = "SELECT * FROM detallecompra  d inner join compra c on d.id_compra = c.id where c.estado = 1";
+     PreparedStatement sent = CrearSentencia(sql);
+     ResultSet rows = Consultar(sent);
+     while (rows.next()) {
+     int det = rows.getInt("id_detalle");
+     int comp = rows.getInt("id_compra");
+     float prec = rows.getFloat("precio");
+     int idprod = rows.getInt("id_producto");
+     int cant = rows.getInt("cantidad");
+     DetalleCompra aux = new DetalleCompra(comp, prec, idprod, cant);
+     aux.setIdDetalle(det);
+     tabla.put(aux.getIdProd(), aux);
+     }
+     return tabla;
+     } finally {
+     Desconectar();
+     }
 
-    }*/
-
+     }*/
     public Double getTotal(int idCompra) throws Exception {
         Double total = 0D;
         Hashtable detalles = TraerDetallesCliente(idCompra);
@@ -392,8 +406,6 @@ public class DatosUsuario extends BBDD {
         }
     }
 
-
-
     public Usuario TraerUsuario(int id) throws Exception {
         try {
             Conectar();
@@ -432,10 +444,6 @@ public class DatosUsuario extends BBDD {
         return inCondition.substring(0, inCondition.length() - 1) + ")";
     }
 
-
-    
-
-
     /* public Hashtable TraerDetallesCliente(int id) throws Exception {
      try {
      Conectar();
@@ -460,32 +468,29 @@ public class DatosUsuario extends BBDD {
      Desconectar();
      }
      }*/
-   
     /*public Hashtable TraerDetallesPendientes() throws Exception {
-        try {
-            Conectar();
-            Hashtable tabla = new Hashtable();
-            String sql = "SELECT * FROM detallecompra  d inner join compra c on d.id_compra = c.id where c.estado = 1";
-            PreparedStatement sent = CrearSentencia(sql);
-            ResultSet rows = Consultar(sent);
-            while (rows.next()) {
-                int det = rows.getInt("id_detalle");
-                int comp = rows.getInt("id_compra");
-                float prec = rows.getFloat("precio");
-                int idprod = rows.getInt("id_producto");
-                int cant = rows.getInt("cantidad");
-                DetalleCompra aux = new DetalleCompra(comp, prec, idprod, cant);
-                aux.setIdDetalle(det);
-                tabla.put(aux.getIdProd(), aux);
-            }
-            return tabla;
-        } finally {
-            Desconectar();
-        }
+     try {
+     Conectar();
+     Hashtable tabla = new Hashtable();
+     String sql = "SELECT * FROM detallecompra  d inner join compra c on d.id_compra = c.id where c.estado = 1";
+     PreparedStatement sent = CrearSentencia(sql);
+     ResultSet rows = Consultar(sent);
+     while (rows.next()) {
+     int det = rows.getInt("id_detalle");
+     int comp = rows.getInt("id_compra");
+     float prec = rows.getFloat("precio");
+     int idprod = rows.getInt("id_producto");
+     int cant = rows.getInt("cantidad");
+     DetalleCompra aux = new DetalleCompra(comp, prec, idprod, cant);
+     aux.setIdDetalle(det);
+     tabla.put(aux.getIdProd(), aux);
+     }
+     return tabla;
+     } finally {
+     Desconectar();
+     }
 
-    }*/
-
-
+     }*/
     /*public int TraerIdCompra() throws Exception {
      try {
      Conectar();
@@ -502,6 +507,4 @@ public class DatosUsuario extends BBDD {
      }
     
      }*/
- 
-
 }
