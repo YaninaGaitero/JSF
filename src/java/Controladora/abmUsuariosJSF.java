@@ -56,7 +56,7 @@ public class abmUsuariosJSF {
             Enumeration elist = ConexionUsuarios.TrearUsuariosT().elements();
             while (elist.hasMoreElements()) {
                 Usuario modi = (Usuario) elist.nextElement();
-                if (modi.getNivel() == 1 || modi.getId() == admin.getId()) {
+                if (modi.getNivel() == 2 || modi.getId() == admin.getId()) {
                     listamod.add(modi);
                 }
             }

@@ -64,7 +64,7 @@
                                     <f:facet name="header">
                                         <h:outputText value="Activos" />
                                     </f:facet>
-                                    <h:outputText value="#{users.activo()}"
+                                    <h:outputText value="#{users.activo()}" />
                                 </h:column>
                             </h:dataTable>
                             <br />
@@ -154,7 +154,7 @@
                             <br />
                             <br />
                             <h:selectOneListbox size="1" value="#{abmUsuariosJSF.selectUserID}">
-                                <f:selectItems value="#{abmUsuariosJSF.listaUsuarios()}"
+                                <f:selectItems value="#{abmUsuariosJSF.listaModificar(CasoLogIn.userlog)}"
                                                var="selUser"
                                                itemLabel="#{selUser.nombre}"
                                                itemValue="#{selUser.id}" />
