@@ -93,51 +93,28 @@ public class DatosUsuario extends BBDD {
         }
     }
 
-    public Hashtable TraerProductos() throws Exception {
-        try {
+    public void ModificarUsuario(Usuario modify) throws Exception
+    {
+        try 
+        {
             Conectar();
-            Hashtable tabla = new Hashtable();
-            String sql = "Select * from productos";
-            PreparedStatement sent = CrearSentencia(sql);
-            ResultSet rows = Consultar(sent);
-            while (rows.next()) {
-                int id = rows.getInt("id");
-                String nombre = rows.getString("nombre");
-                String descrip = rows.getString("descripcion");
-                int sto = rows.getInt("stock");
-                float precio = rows.getFloat("precio");
-                int estado = rows.getInt("estado");
-                Producto aux = new Producto(id, nombre, descrip, sto, precio, estado);
-                tabla.put(aux.getId(), aux);
-            }
-            return tabla;
-        } finally {
-            Desconectar();
+            String sql = "update Usuarios " +
+                         "set nombre='" + modify.getNombre() + "', " +
+                         "apellido='" + modify.getApellido() + "', " +
+                         "direccion='" + modify.getDireccion() + "', " +
+                         "documento=" + modify.getDocumento() + ", " +
+                         "estado=" + modify.getEstado() + " " +
+                         "where id=" + modify.getId();
+            PreparedStatement ps = CrearSentencia(sql);
+            Actualizar(ps);
         }
-
-    }
-
-    public Producto TraerProducto(int id) throws Exception {
-        try {
-            Conectar();
-            Producto aux = new Producto();
-            String sql = "select * from productos where id = " + id + "";
-            PreparedStatement sent = CrearSentencia(sql);
-            ResultSet rows = Consultar(sent);
-            while (rows.next()) {
-                int id_ = rows.getInt("id");
-                String nombre = rows.getString("nombre");
-                String descrip = rows.getString("descripcion");
-                int sto = rows.getInt("stock");
-                float precio = rows.getFloat("precio");
-                int estado = rows.getInt("estado");
-                aux = new Producto(id_, nombre, descrip, sto, precio, estado);
-            }
-            return aux;
-        } finally {
+        finally
+        {
             Desconectar();
         }
     }
+
+
 
     public Usuario TraerUsuario(String nomb) throws Exception {
         try {

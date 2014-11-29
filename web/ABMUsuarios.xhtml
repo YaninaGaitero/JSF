@@ -16,8 +16,8 @@
                     <h:commandLink value="Salir" action="failed" ></h:commandLink>
                 </h:form>
                 <h:form rendered="#{CasoLogIn.admin}">
-                    <div id="marco">
-                        <div id="listado">
+                    <h:panelGroup id="marco" layout="block" style="position:absolute;">
+                        <h:panelGroup id="listado" layout="block" style="width:50%;height: 100%;float: left">
                             <h1>Lista de Usuarios</h1>
                             <br />
                             <br />
@@ -59,11 +59,142 @@
                                     <h:outputText value="#{users.direccion}" />
                                 </h:column>
                             </h:dataTable>
-                        </div>
-                        <div id="altauser">
+                            <br />
+                            <h:messages />
+                        </h:panelGroup>
+                        <h:panelGroup id="altauser" layout="block" style="width: 50%;height:50%;float:right;">
                             <h1>Alta de Usuarios</h1>
-                        </div>
-                    </div>
+                            <br />
+                            <br />
+                            <table align="center">
+                                <tr>
+                                    <td>Nombre:</td>
+                                    <td>
+                                        <h:inputText value="#{abmUsuariosJSF.adding.nombre}" 
+                                                     required="true"
+                                                     requiredMessage="Ingrese el Nombre"
+                                                     validatorMessage="El nombre debe tener al menos 5 caracteres">
+                                            <f:validateLength minimum="5" />
+                                        </h:inputText>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Apellido:</td>
+                                    <td>
+                                        <h:inputText value="#{abmUsuariosJSF.adding.apellido}" 
+                                                     required="true"
+                                                     requiredMessage="Ingrese el Apellido">
+                                        </h:inputText> 
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Password:</td>
+                                    <td>
+                                        <h:inputSecret value="#{abmUsuariosJSF.adding.pass}" 
+                                                       required="true"
+                                                       requiredMessage="Ingresa una contraseña"
+                                                       validatorMessage="El Pass debe tener al menos 5 caracteres">
+                                            <f:validateLength minimum="5" />
+                                        </h:inputSecret>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Direccion:</td>
+                                    <td><h:inputText value="#{abmUsuariosJSF.adding.direccion}" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Documento:</td>
+                                    <td>
+                                        <h:inputText value="#{abmUsuariosJSF.adding.documento}" 
+                                                     required="true" 
+                                                     requiredMessage="Ingrese el Nº de Documento"
+                                                     converterMessage="Numero de DNI Invalido">
+                                            <f:convertNumber integerOnly="true" />
+                                        </h:inputText>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Telefono:</td>
+                                    <td>
+                                        <h:inputText value="#{abmUsuariosJSF.adding.telefono}" 
+                                                     required="true"
+                                                     requiredMessage="Ingrese el Nº de telefono"
+                                                     converterMessage="El numero de Tel no es valido">
+                                            <f:convertNumber integerOnly="true" />
+                                        </h:inputText>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Tipo de Usuario:</td>
+                                    <td>
+                                        <h:selectOneListbox size="1" value="#{abmUsuariosJSF.adding.nivel}">
+                                            <f:selectItem itemLabel="Administrador" itemValue="1"/>
+                                            <f:selectItem itemLabel="Comun" itemValue="2"/>
+                                        </h:selectOneListbox>
+                                    </td>
+                                </tr>
+                            </table>
+                            <br />
+                            <br />
+                            <h:commandButton value="Agregar Usuario" action="#{abmUsuariosJSF.agregarUsuario()}"/>
+                        </h:panelGroup> 
+                        <h:panelGroup id="modifuser" layout="block" style="width:50%;height:50%;float:right;">
+
+                            <h1>Modificacion de Usuarios</h1>
+                            <br />
+                            <br />
+                            <h:selectOneListbox size="1" value="#{abmUsuariosJSF.selectUserID}">
+                                <f:selectItems value="#{abmUsuariosJSF.listaUsuarios()}" 
+                                               var="selUser"
+                                               itemLabel="#{selUser.nombre}"
+                                               itemValue="#{selUser.id}" />
+                                <f:ajax event="click" listener="#{abmUsuariosJSF.selectUser()}" render="namemod apemod dirmod dnimod statemod" />
+                            </h:selectOneListbox>
+                            <table>
+                                <tr>
+                                    <td>Nombre:</td>
+                                    <td>
+                                        <h:inputText id="namemod" value="#{abmUsuariosJSF.modify.nombre}">
+                                        </h:inputText>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Apellido:</td>
+                                    <td>
+                                        <h:inputText id="apemod" value="#{abmUsuariosJSF.modify.apellido}">
+                                        </h:inputText>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Direccion:</td>
+                                    <td>
+                                        <h:inputText id="dirmod" value="#{abmUsuariosJSF.modify.direccion}">
+                                        </h:inputText>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Documento:</td>
+                                    <td>
+                                        <h:inputText id="dnimod" value="#{abmUsuariosJSF.modify.documento}">
+                                            <f:convertNumber integerOnly="true" />
+                                        </h:inputText>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Estado:</td>
+                                    <td>
+                                        <h:selectOneListbox id="statemod" value="#{abmUsuariosJSF.modify.estado}">
+                                            <f:selectItem itemLabel="Activo" itemValue="1" />
+                                            <f:selectItem itemLabel="Inactivo" itemValue="0" />
+                                        </h:selectOneListbox>
+                                    </td>
+                                </tr>
+                            </table>
+                            <br />
+                            <br />
+                            <h:commandButton value="Modificar Usuario" action="#{abmUsuariosJSF.modificarUsuario()}" />
+                        </h:panelGroup>
+                    </h:panelGroup>
                 </h:form>
             </ui:define>
         </ui:composition>
