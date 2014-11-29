@@ -1,72 +1,42 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
     <h:head>
         <title>Facelet Title</title>
         <script type="text/javascript" 
                 src="/Resources/js/MenuJS.js">
-        </script>        
-        <script>
-            function Redirect()
-            {
-                setTimeout("location.href='index.xhtml'", 3000);
-            }
-        </script>
+     </script>
+        
         <link rel="stylesheet" href="Resources/Menucss.css"/>
     </h:head>
     <h:body>
         <nav>
-            <h:form rendered="#{CasoLogIn.comun == true}" class="formulario">
-                <ul class="menu">
-                    <li>
-                        <h:commandLink value="HOME" action="home" />
-                    </li>
-                    <li><a href="#">COMPRAS</a>
-                        <ul class="sub-menu">
-                            <li><h:commandLink value="VER COMPRAS" action="histcompras" /></li>
-                            <!--li><a href="#">Level 3 Menu</a>
-                                <ul>
-                                    <li><a href="#">Sub-Menu 4</a></li>
-                                    <li><a href="#">Sub-Menu 5</a></li>
-                                    <li><a href="#">Sub-Menu 6</a></li>
-                                </ul>
-                            </li-->
-                        </ul>
-                    </li>
-                    <li><h:commandLink value="LOG OUT" action="#{CasoLogIn.logOut()}" /></li>
-                </ul>
-
-            </h:form>
-
-
-            <h:form rendered="#{CasoLogIn.comun != true}" class="formulario">
-                <ul class="menu">
-                    <li>
-                        <h:commandLink value="HOME" action="home" />
-                    </li>
-                    <li><a href="#">COMPRAS</a>
-                        <ul class="sub-menu">
-                            <li><h:commandLink value="VER COMPRAS" action="histcompras" /></li>
-                        </ul>
-                    </li>
-                    <li><a href="#">PRODUCTOS</a>
-                        <ul class="sub-menu">
-                            <li><h:commandLink value="ALTA" action="altaprod" /></li>
-                        </ul>
-                                                <ul class="sub-menu">
-                            <li><h:commandLink value="BAJA Y MODIFICACION" action="modifprod" /></li>
-                        </ul>
-                    </li>
-                    <li><h:commandLink value="LOG OUT" action="#{CasoLogIn.logOut()}" /></li>
-                </ul>
-            </h:form>
+            <ul class="menu">
+                <li><a href="#"><i class="icon-home"></i>USUARIOS</a>
+                    <ul class="sub-menu">
+                        <li><a href="#">Sub-Menu 1</a></li>
+                        <li><a href="#">Sub-Menu 2</a></li>
+                        <li><a href="#">Sub-Menu 3</a></li>
+                    </ul>
+                </li>
+                <li><a href="#"><i class="icon-user"></i>PRODUCTOS</a></li>
+                <li><a href="#"><i class="icon-camera"></i>PIQUEOS</a>
+                    <ul class="sub-menu">
+                        <li><a href="#">Sub-Menu 1</a></li>
+                        <li><a href="#">Level 3 Menu</a>
+                            <ul>
+                                <li><a href="#">Sub-Menu 4</a></li>
+                                <li><a href="#">Sub-Menu 5</a></li>
+                                <li><a href="#">Sub-Menu 6</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li><a href="#"><i class="icon-bullhorn"></i>BLOG</a></li>
+                <li><a href="#"><i class="icon-envelope-alt"></i>CONTACT</a></li>
+            </ul>
         </nav>
-
     </h:body>
-    
-    <ui:insert name="contenido" />
 </html>
 

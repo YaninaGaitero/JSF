@@ -6,19 +6,17 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <title>Menu Principal</title>
-        
         <script>
             function Redirect()
             {
                 setTimeout("location.href='index.xhtml'",3000);
             }
         </script>
- 
     </h:head>
     <h:body>
-        <h:form rendered="#{CasoLogIn.comun == true}" class="formulario">
+        <h:form rendered="#{CasoLogIn.comun == true}">
             <h:dataTable border="1">
-                <h:column class="menu">
+                <h:column>
                     <f:facet name="header">
                         <h:commandLink value="Home" action="home" />
                     </f:facet>
