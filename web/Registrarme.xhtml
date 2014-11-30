@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Registro</title>
+
+        <link rel="stylesheet" href="Resources/cssLogin.css"/>
+    </h:head>
+    <h:body>
+        <section class="contenedorLogin">
+            <h:form class="formulario">
+                <h1>Formulario de Registro</h1>
+                <p>Nombre <h:inputText id="Nomb" value="#{abmUsuariosJSF.adding.nombre}" 
+                                       required="true"
+                                       requiredMessage="Ingrese su Nombre"
+                                       validatorMessage="El nombre debe tener al menos 5 caracteres">
+                        <f:validateLength minimum="5"/></h:inputText></p>
+                <p>Apellido <h:inputText id="Apell" value="#{abmUsuariosJSF.adding.apellido}"
+                                         required="true"
+                                         requiredMessage="Ingrese su Apellido"></h:inputText></p>
+                <p>Password <h:inputSecret id="Passwo" value="#{abmUsuariosJSF.adding.pass}" 
+                                           required="true"
+                                           requiredMessage="Ingrese una contraseña"
+                                           validatorMessage="La contraseña debe tener al menos 5 caracteres">
+                        <f:validateLength minimum="5" />
+                    </h:inputSecret></p>
+                <p>Documento <h:inputText id="Documen" value="#{abmUsuariosJSF.adding.documento}"
+                                          required="true"
+                                          requiredMessage="Ingrese su Nº de Documento"
+                                          converterMessage="Numero de DNI Invalido">
+                        <f:convertNumber integerOnly="true" /></h:inputText></p>
+                <p>Telefono <h:inputText id="Telefo" value="#{abmUsuariosJSF.adding.telefono}"                                                      required="true"
+                                         requiredMessage="Ingrese su Nº de telefono"
+                                         converterMessage="El numero de Tel no es valido"/></p>
+                <p>Direccion <h:inputText id="Direcci" value="#{abmUsuariosJSF.adding.direccion}" /></p>
+                <h:message infoStyle="color:blue" errorStyle="color:red"  for="password"> </h:message>
+                <br />
+                <br />
+                <section class="seccionBotones">
+                    <h:commandButton value="Registrarme" action="#{abmUsuariosJSF.agregarUsuario()}" />
+
+                </section>
+            </h:form>
+        </section>
+    </h:body>
+</html>
+

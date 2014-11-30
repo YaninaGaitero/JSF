@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.faces.event.AjaxBehaviorEvent;
+import javax.faces.event.ValueChangeEvent;
 
 /**
  *
@@ -125,6 +127,16 @@ public class ControladoraHistCompraJSF
 
     public void setSelCompra(Compra selCompra) {
         this.selCompra = selCompra;
+    }
+   public void selectEvent(AjaxBehaviorEvent E)throws Exception
+    {
+            Enumeration listu = ConexionFacturas.TraerDetallesCliente(IDCompra).elements();
+            while (listu.hasMoreElements())
+            {
+                Compra p = (Compra)listu.nextElement();
+                if (p.getIdCompra()==IDCompra)
+                    setSelCompra(p);
+            }
     }
     
     
