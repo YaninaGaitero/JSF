@@ -108,8 +108,7 @@ public class DetalleCompra {
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
-   public DaoFacturas getBd() throws Exception 
-    
+   public DaoFacturas getBd() throws Exception     
     {
         if (this.bd == null) 
         

@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="MenuAdmin.xhtml">
+            <ui:define name="contenido">
+                <h:form rendered="#{!CasoLogIn.logged}">
+                    <h1>Usted No esta Autorizado. Acceso denegado</h1>
+                    <h:commandLink action="failed" value="Salir" />
+                </h:form>
+                <h:panelGroup id="marco" layout="block" style="position: absolute" rendered="#{CasoLogIn.comun}">
+                    <h:panelGroup style="">
+                        <h3 align="center">Listado de Productos</h3>
+                        <br />
+                        <h:dataTable value="#{jSFControladoraABMProds.listaProductos()}" 
+                                     var="fila" border="2">
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Nombre" />
+                                </f:facet>
+                                <h:outputText id="nombre" value="#{fila.nombre}" />
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Descripcion" />
+                                </f:facet>
+                                <h:outputText id="descripcion" value="#{fila.descripcion}" />
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Precio" />
+                                </f:facet>
+                                <h:outputText id="precio" value="#{fila.precio}"><f:convertNumber minFractionDigits="2" /></h:outputText>
+                            </h:column>
+                        </h:dataTable>
+                        <br />
+                        <h:selectOneListbox size="1" value="#{carritoDeCompras.selectProductoID}" >
+                            <f:selectItems value="#{jSFControladoraABMProds.listaProductos()}" 
+                                           var="prod" itemLabel="#{prod.nombre}" itemValue="#{prod.id}" />
+                        </h:selectOneListbox>
+                        <br />
+                        <h:inputText ></h:inputText>
+                    </h:panelGroup>    
+                </h:panelGroup>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+
