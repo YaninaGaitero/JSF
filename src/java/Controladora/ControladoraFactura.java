@@ -27,19 +27,20 @@ public class ControladoraFactura {
     private Compra c= new Compra();
     DaoProductos daoProductos;
     
-    public void agregarAlCarrito(DetalleCompra d){
-        if(getListaProductos()==null){
+    public void agregarAlCarrito(DetalleCompra d) {
+        if (getListaProductos() == null) {
             setListaProductos(new Hashtable());
-        }else{
-            if(!existeDetalleConEsteID(d.getIdProd())){//no existe ese prod en esa fact lo agrega
-                listaProductos.put(det.getIdProd(), det);
-            }else{// si esta lo borra y lo agrega sumandole la cant
-                DetalleCompra oDet= (DetalleCompra) listaProductos.get(d.getIdProd());
-                listaProductos.remove(d.getIdProd());
-                oDet.setCantidad(oDet.getCantidad()+d.getCantidad());
-                listaProductos.put(d.getIdProd(),oDet);
-            }
         }
+        d.setCantidad(det.getCantidad());
+        if (!existeDetalleConEsteID(d.getIdProd())) {//no existe ese prod en esa fact lo agrega
+            listaProductos.put(det.getIdProd(), det);
+        } else {// si esta lo borra y lo agrega sumandole la cant
+            DetalleCompra oDet = (DetalleCompra) listaProductos.get(d.getIdProd());
+            listaProductos.remove(d.getIdProd());
+            oDet.setCantidad(oDet.getCantidad() + d.getCantidad());
+            listaProductos.put(d.getIdProd(), oDet);
+        }
+        
     }
     
     private Boolean existeDetalleConEsteID(int idProd ){
