@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="MenuAdmin.xhtml">
+            <ui:define name="contenido">
+                <h:form>
+                    <center>Cantidad a Comprar  <h:inputText value="#{controladoraFactura.det.cantidad}" required="true"/></center>
+                    <h:dataTable border="2" value="#{jSFControladoraABMProds.listaProductos()}" var="fila">
+                        <h:column>
+                            <f:facet name="header">
+                                <center><h:outputText value="ID Producto" /></center>
+                            </f:facet>
+                            <h:outputText id="idcli" value="#{fila.id}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <center><h:outputText value="Nombre de Producto" /></center>
+                            </f:facet>
+                            <h:outputText id="nom" value="#{fila.descripcion}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <center><h:outputText value="Stock" /></center>
+                            </f:facet>
+                            <h:outputText id="dom" value="#{fila.stock}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <center><h:outputText value="Precio" /></center>
+                            </f:facet>
+                            <h:outputText id="tel" value="$#{fila.precio}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header" >
+                                <center><h:outputText value="Agregar al Carrito"/></center>
+                            </f:facet>
+                            <h:commandLink value="  Agregar  " >
+                            </h:commandLink>
+                        </h:column> 
+                    </h:dataTable>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

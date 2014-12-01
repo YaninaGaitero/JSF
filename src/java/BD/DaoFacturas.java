@@ -171,16 +171,28 @@ public class DaoFacturas extends BBDD{
         }
     }
 
-    public void GrabarDetalle(int idCom, float precio, Producto Prod, int cantidad) throws Exception {
+    private void GrabarDetalle(int idCom, float precio, int Prod, int cantidad) throws Exception {
         try {
             Conectar();
 
-            String sql = "insert into detallecompra ( id_compra, precio, id_producto, cantidad) values(" + idCom + ", " + precio + ", " + Prod.getId() + ", " + cantidad + ")";
+            String sql = "insert into detallecompra ( id_compra, precio, id_producto, cantidad) values(" + idCom + ", " + precio + ", " + Prod + ", " + cantidad + ")";
             PreparedStatement sent = CrearSentencia(sql);
             Actualizar(sent);
 
         } finally {
             Desconectar();
+        }
+    }
+    public void grabaDetalles(Hashtable detalles, int idCompra) {
+        Enumeration enu = detalles.elements();
+        while (enu.hasMoreElements()) {
+            DetalleCompra aux = new DetalleCompra();
+            aux = (DetalleCompra) enu.nextElement();
+            try {
+                GrabarDetalle(idCompra, aux.getPrecio(), aux.getIdProd(), aux.getCantidad());
+            } catch (Exception ex) {
+                
+            }
         }
     }
 

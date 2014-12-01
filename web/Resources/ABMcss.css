@@ -7,7 +7,11 @@ and open the template in the editor.
     Created on : 27/11/2014, 18:29:37
     Author     : alumno
 */
-
+body
+{
+    background-color: #8BB9C7;
+    font-family: sans-serif;
+}
 #marco
 { 
     position:absolute;

@@ -42,6 +42,10 @@
             <from-outcome>abmusers</from-outcome>
             <to-view-id>faces/ABMUsuarios.xhtml</to-view-id>
         </navigation-case>
+                <navigation-case>
+            <from-outcome>buy</from-outcome>
+            <to-view-id>faces/Carrito.xhtml</to-view-id>
+        </navigation-case>
     </navigation-rule> 
     <managed-bean>
         <managed-bean-name>CasoLogIn</managed-bean-name>
