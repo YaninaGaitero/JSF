@@ -15,38 +15,94 @@
                     <h:commandLink action="failed" value="Salir" />
                 </h:form>
                 <h:panelGroup id="marco" layout="block" style="position: absolute" rendered="#{CasoLogIn.comun}">
-                    <h:panelGroup style="">
-                        <h3 align="center">Listado de Productos</h3>
-                        <br />
-                        <h:dataTable value="#{jSFControladoraABMProds.listaProductos()}" 
-                                     var="fila" border="2">
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Nombre" />
-                                </f:facet>
-                                <h:outputText id="nombre" value="#{fila.nombre}" />
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Descripcion" />
-                                </f:facet>
-                                <h:outputText id="descripcion" value="#{fila.descripcion}" />
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Precio" />
-                                </f:facet>
-                                <h:outputText id="precio" value="#{fila.precio}"><f:convertNumber minFractionDigits="2" /></h:outputText>
-                            </h:column>
-                        </h:dataTable>
-                        <br />
-                        <h:selectOneListbox size="1" value="#{carritoDeCompras.selectProductoID}" >
-                            <f:selectItems value="#{jSFControladoraABMProds.listaProductos()}" 
-                                           var="prod" itemLabel="#{prod.nombre}" itemValue="#{prod.id}" />
-                        </h:selectOneListbox>
-                        <br />
-                        <h:inputText ></h:inputText>
-                    </h:panelGroup>    
+                    <h:panelGroup style="width: 60%;height:100%;float: left">
+                        <h:form>
+                            <h3 align="center">Listado de Productos</h3>
+                            <br />
+                            <h:dataTable value="#{jSFControladoraABMProds.listaProductos()}" 
+                                         var="fila" border="2">
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Nombre" />
+                                    </f:facet>
+                                    <h:outputText id="nombre" value="#{fila.nombre}" />
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Descripcion" />
+                                    </f:facet>
+                                    <h:outputText id="descripcion" value="#{fila.descripcion}" />
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Precio" />
+                                    </f:facet>
+                                    <h:outputText id="precio" value="#{fila.precio}"><f:convertNumber minFractionDigits="2" /></h:outputText>
+                                </h:column>
+                            </h:dataTable>
+                            <br />
+                            <h:selectOneListbox size="1" value="#{carritoDeCompras.selectProductoID}" >
+                                <f:selectItems value="#{jSFControladoraABMProds.listaProductos()}" 
+                                               var="prod" itemLabel="#{prod.nombre}" itemValue="#{prod.id}" />
+                            </h:selectOneListbox>
+                            <br />
+                            <h:messages />
+                            <br />
+                            <h:inputText value="#{carritoDeCompras.cantidadIng}" >
+                                <f:convertNumber integerOnly="true" />
+                                <f:validateLongRange minimum="1" />
+                            </h:inputText>
+                            <br/>
+                            <h:commandButton value="Ingresar" action="#{carritoDeCompras.agregarDetalle()}" />
+                        </h:form>
+                    </h:panelGroup>
+                    <h:panelGroup style="width: 40%;height: 100%;float: right" rendered="#{carritoDeCompras.hayCarrito()}">
+                        <h:form>
+                            <h4>Orden de compra</h4>
+                            <br />
+                            <h:dataTable value="#{carritoDeCompras.detalles}" var="detalles" border="1">
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Producto" />
+                                    </f:facet>
+                                    <h:outputText value="#{detalles.idProd}" />
+                                    <f:facet name="footer"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Cantidad" />
+                                    </f:facet>
+                                    <h:outputText value="#{detalles.cantidad}" />
+                                    <f:facet name="footer"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Precio" />
+                                    </f:facet>
+                                    <h:outputText value="#{detalles.precio}" />
+                                    <f:facet name="footer">
+                                        <h:outputText value="Total:..." />
+                                    </f:facet>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Subtotal" />
+                                    </f:facet>
+                                    <h:outputText value="#{detalles.subTotal()}" />
+                                    <f:facet name="footer">
+                                        <h:outputText value="#{carritoDeCompras.totalCarrito()}" />
+                                    </f:facet>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Descartar"/>
+                                    </f:facet>
+                                    <h:commandLink value="Borrar" action="#{carritoDeCompras.borrarDetalle(detalles.idProd)}" />
+                                    <f:facet name="footer"/>
+                                </h:column>
+                            </h:dataTable>
+                        </h:form>
+                    </h:panelGroup>
                 </h:panelGroup>
             </ui:define>
         </ui:composition>

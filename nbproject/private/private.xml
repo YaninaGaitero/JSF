@@ -3,18 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Yanina/Documents/GitHub/JSF/web/Resources/tableCSS.css</file>
-            <file>file:/C:/Users/Yanina/Documents/GitHub/JSF/web/ABMUsuarios.xhtml</file>
-            <file>file:/C:/Users/Yanina/Documents/GitHub/JSF/web/WEB-INF/faces-config.xml</file>
-            <file>file:/C:/Users/Yanina/Documents/GitHub/JSF/src/java/Controladora/ControladoraABMProds.java</file>
-            <file>file:/C:/Users/Yanina/Documents/GitHub/JSF/web/Resources/cssLogin.css</file>
-            <file>file:/C:/Users/Yanina/Documents/GitHub/JSF/src/java/BD/DaoFacturas.java</file>
-            <file>file:/C:/Users/Yanina/Documents/GitHub/JSF/web/MenuAdmin.xhtml</file>
-            <file>file:/C:/Users/Yanina/Documents/GitHub/JSF/web/AltaProductos.xhtml</file>
-            <file>file:/C:/Users/Yanina/Documents/GitHub/JSF/web/Carrito.xhtml</file>
-            <file>file:/C:/Users/Yanina/Documents/GitHub/JSF/web/index.xhtml</file>
-            <file>file:/C:/Users/Yanina/Documents/GitHub/JSF/src/java/Beans/DetalleCompra.java</file>
-            <file>file:/C:/Users/Yanina/Documents/GitHub/JSF/src/java/Controladora/ControladoraCarrito.java</file>
+            <file>file:/C:/Users/usuario/Desktop/Bruno/Facultad/JSF/web/WEB-INF/faces-config.xml</file>
+            <file>file:/C:/Users/usuario/Desktop/Bruno/Facultad/JSF/src/java/Beans/DetalleCompra.java</file>
+            <file>file:/C:/Users/usuario/Desktop/Bruno/Facultad/JSF/src/java/Controladora/carritoDeCompras.java</file>
+            <file>file:/C:/Users/usuario/Desktop/Bruno/Facultad/JSF/web/Comprar.xhtml</file>
         </group>
     </open-files>
 </project-private>
