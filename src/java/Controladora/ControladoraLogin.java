@@ -22,7 +22,8 @@ public class ControladoraLogin
     private Usuario userlog;
     private String nombre;
     private String pass;
-
+    private int UltimaCompra=0;
+    
     public ControladoraLogin() throws Exception 
     {
         this.ConexionUsuarios = new DatosUsuario();
@@ -112,6 +113,14 @@ public class ControladoraLogin
 
     public void setPass(String pass) {
         this.pass = pass;
+    }
+
+    public int getUltimaCompra() {
+        return UltimaCompra;
+    }
+
+    public void setUltimaCompra(int UltimaCompra) {
+        this.UltimaCompra = UltimaCompra;
     }
     
 }

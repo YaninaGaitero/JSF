@@ -17,7 +17,7 @@
                 <h:form rendered="#{CasoLogIn.logged}" id="form1">
                     <h1>Historial de Compras</h1>
                     <h:selectOneListbox size="1" value="#{controladoraHistCompraJSF.IDCompra}">
-                        <f:selectItems value="#{controladoraHistCompraJSF.CabecerasFact(CasoLogIn.userlog)}" var="facturas" itemLabel="#{facturas.fecha}" itemValue="#{facturas.idCompra}" />
+                        <f:selectItems value="#{controladoraHistCompraJSF.cabecerasFact(CasoLogIn.userlog)}" var="facturas" itemLabel="#{facturas.fecha}" itemValue="#{facturas.idCompra}" />
                         <f:ajax listener="#{controladoraHistCompraJSF.selFactura()}" render="@form" />
                         
                        
@@ -43,7 +43,7 @@
                             <td>Precio</td>
                             <td>Subtotal</td>
                         </tr>
-                        <ui:repeat value="#{controladoraHistCompraJSF.DetallesFact(controladoraHistCompraJSF.selCompra.idCompra)}" var="detalle">
+                        <ui:repeat value="#{controladoraHistCompraJSF.detallesFact(controladoraHistCompraJSF.selCompra.idCompra)}" var="detalle">
                             <tr>
                                 <td><h:outputText value="#{detalle.cantidad}" /></td>
                                 <td><h:outputText value="#{detalle.idProd}" /> </td>

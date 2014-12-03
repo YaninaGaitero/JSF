@@ -161,7 +161,7 @@ public class DaoFacturas extends BBDD{
             procedimiento.registerOutParameter("lastID", Types.INTEGER);
             procedimiento.setDate("fec", new java.sql.Date(new java.util.Date().getTime()));
             procedimiento.setInt("usuario", idUsuario);
-            procedimiento.setInt("EST", 1);
+            procedimiento.setInt("est", 1);
             procedimiento.execute();
             ultimaFactura = procedimiento.getInt("lastID");
             procedimiento.close();
@@ -186,7 +186,7 @@ public class DaoFacturas extends BBDD{
     public void grabaDetalles(Hashtable detalles, int idCompra) {
         Enumeration enu = detalles.elements();
         while (enu.hasMoreElements()) {
-            DetalleCompra aux = new DetalleCompra();
+            DetalleCompra aux;
             aux = (DetalleCompra) enu.nextElement();
             try {
                 GrabarDetalle(idCompra, aux.getPrecio(), aux.getIdProd(), aux.getCantidad());

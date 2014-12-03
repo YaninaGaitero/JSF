@@ -47,8 +47,8 @@
             <to-view-id>Comprar.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
-            <from-outcome>buy</from-outcome>
-            <to-view-id>faces/Carrito.xhtml</to-view-id>
+            <from-outcome>compra</from-outcome>
+            <to-view-id>faces/CompraRealizada.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule> 
     <managed-bean>

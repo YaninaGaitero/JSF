@@ -11,7 +11,10 @@ import BD.*;
 import Beans.*;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -22,6 +25,8 @@ import java.util.Iterator;
 public class carritoDeCompras {
 
     private DatosProductos ConexionProductos;
+    private DaoFacturas ConexionCompras;
+    
     private int selectProductoID;
     private Producto choose;
     private int cantidadIng;
@@ -34,6 +39,7 @@ public class carritoDeCompras {
      */
     public carritoDeCompras() throws Exception {
         ConexionProductos = new DatosProductos();
+        ConexionCompras = new DaoFacturas();
     }
 
     public String agregarDetalle() {
@@ -99,6 +105,31 @@ public class carritoDeCompras {
     public boolean hayCarrito()
     {
         return !getDetalles().isEmpty();
+    }
+    
+    public String confirmarCompra(ControladoraLogin log)
+    {
+        try 
+        {
+            String answer;
+            Hashtable detalles = new Hashtable();
+            Iterator det = getDetalles().iterator();
+            while (det.hasNext())
+            {
+                DetalleCompra dc = (DetalleCompra)det.next();
+                detalles.put(dc.getIdProd(), dc);
+            }
+            int compra;
+            compra = ConexionCompras.GrabarCompra(log.getUserlog().getId());
+            log.setUltimaCompra(compra);
+            ConexionCompras.grabaDetalles(detalles, compra);
+            return "compra";
+        } 
+        catch (Exception ex) 
+        {
+            Logger.getLogger(carritoDeCompras.class.getName()).log(Level.SEVERE, null, ex);
+            return "failed";
+        }
     }
     
     public int getSelectProductoID() {

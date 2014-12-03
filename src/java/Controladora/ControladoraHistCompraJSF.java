@@ -26,8 +26,8 @@ public class ControladoraHistCompraJSF
 {
 
     DaoFacturas ConexionFacturas;
-    private int IDCompra;
-    private Compra selCompra;
+    private int IDCompra=0;
+    private Compra selCompra=null;
     /**
      * Creates a new instance of ControladoraHistCompraJSF
      * @throws java.lang.Exception
@@ -37,7 +37,7 @@ public class ControladoraHistCompraJSF
         ConexionFacturas = new DaoFacturas();
     }
     
-    public ArrayList CabecerasFact(Usuario cliente)
+    public ArrayList cabecerasFact(Usuario cliente)
     {
         try 
         {
@@ -49,6 +49,20 @@ public class ControladoraHistCompraJSF
                 listafact.add(fact);
             }
             return listafact;
+        } 
+        catch (Exception ex) 
+        {
+            Logger.getLogger(ControladoraHistCompraJSF.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+    
+    public Compra ultimaCompra(int ultima)
+    {
+        try 
+        {
+            Compra realizada = ConexionFacturas.traerCompraBYid(ultima);
+            return realizada;
         } 
         catch (Exception ex) 
         {
@@ -92,7 +106,28 @@ public class ControladoraHistCompraJSF
         }
     }
     
-    public ArrayList DetallesFact (int id_client)
+    public ArrayList detallesUltimos(int idComp,int id_client)
+    {
+        try 
+        {
+            ArrayList detalles = new ArrayList();
+            Enumeration elist = ConexionFacturas.TraerDetallesCliente(id_client).elements();
+            while (elist.hasMoreElements())
+            {
+                DetalleCompra add = (DetalleCompra)elist.nextElement();
+                if (add.getIdCompra()==idComp)
+                    detalles.add(add);
+            }
+            return detalles;
+        } 
+        catch (Exception ex) 
+        {
+            Logger.getLogger(ControladoraHistCompraJSF.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+    
+    public ArrayList detallesFact (int id_client)
     {
         try 
         {
