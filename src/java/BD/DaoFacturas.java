@@ -14,6 +14,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Types;
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
@@ -48,6 +49,7 @@ public class DaoFacturas extends BBDD{
         }
         return total;
     }
+    
     
     
     public Hashtable TraerDetallesCliente(int id) throws Exception {

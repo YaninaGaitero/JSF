@@ -57,19 +57,7 @@ public class ControladoraHistCompraJSF
         }
     }
     
-    public Compra ultimaCompra(int ultima)
-    {
-        try 
-        {
-            Compra realizada = ConexionFacturas.traerCompraBYid(ultima);
-            return realizada;
-        } 
-        catch (Exception ex) 
-        {
-            Logger.getLogger(ControladoraHistCompraJSF.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
-        }
-    }
+    
     
     public double total()
     {
@@ -80,6 +68,27 @@ public class ControladoraHistCompraJSF
         } catch (Exception ex) {
             Logger.getLogger(ControladoraHistCompraJSF.class.getName()).log(Level.SEVERE, null, ex);
             return 0;
+        }
+    }
+    
+    public ArrayList detallesFact (int id_client)
+    {
+        try 
+        {
+            ArrayList detalles = new ArrayList();
+            Enumeration elist = ConexionFacturas.TraerDetallesCliente(id_client).elements();
+            while (elist.hasMoreElements())
+            {
+                DetalleCompra add = (DetalleCompra)elist.nextElement();
+                if (add.getIdCompra()==getIDCompra())
+                    detalles.add(add);
+            }
+            return detalles;
+        } 
+        catch (Exception ex) 
+        {
+            Logger.getLogger(ControladoraHistCompraJSF.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
         }
     }
     
@@ -106,12 +115,12 @@ public class ControladoraHistCompraJSF
         }
     }
     
-    public ArrayList detallesUltimos(int idComp,int id_client)
+    public ArrayList detallesUltimos(int idComp)
     {
         try 
         {
             ArrayList detalles = new ArrayList();
-            Enumeration elist = ConexionFacturas.TraerDetallesCliente(id_client).elements();
+            Enumeration elist = ConexionFacturas.TraerDetallesCliente(idComp).elements();
             while (elist.hasMoreElements())
             {
                 DetalleCompra add = (DetalleCompra)elist.nextElement();
@@ -127,19 +136,12 @@ public class ControladoraHistCompraJSF
         }
     }
     
-    public ArrayList detallesFact (int id_client)
+    public Compra ultimaCompra(int ultima)
     {
         try 
         {
-            ArrayList detalles = new ArrayList();
-            Enumeration elist = ConexionFacturas.TraerDetallesCliente(id_client).elements();
-            while (elist.hasMoreElements())
-            {
-                DetalleCompra add = (DetalleCompra)elist.nextElement();
-                if (add.getIdCompra()==getIDCompra())
-                    detalles.add(add);
-            }
-            return detalles;
+            Compra realizada = ConexionFacturas.traerCompraBYid(ultima);
+            return realizada;
         } 
         catch (Exception ex) 
         {
@@ -147,6 +149,19 @@ public class ControladoraHistCompraJSF
             return null;
         }
     }
+    
+    public double ultimoTotal(int ultimo)
+    {
+        try 
+        {
+            double result = ConexionFacturas.getTotal(ultimo);
+            return result;
+        } catch (Exception ex) {
+            Logger.getLogger(ControladoraHistCompraJSF.class.getName()).log(Level.SEVERE, null, ex);
+            return 0;
+        }
+    }
+    
 
     public int getIDCompra() {
         return IDCompra;

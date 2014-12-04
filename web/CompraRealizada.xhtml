@@ -11,7 +11,7 @@
             <h:commandLink value="Salir" action="home" />
             <br />
             <br />
-            <table>
+            <table border="2">
                 <tr>
                     <td>Fecha:</td>
                     <td>
@@ -30,7 +30,13 @@
                     <td></td>
                     <td></td>
                 </tr>
-                <ui:repeat value="#{controladoraHistCompraJSF.detallesUltimos(CasoLogIn.ultimaCompra, CasoLogIn.userlog.id)}" var="detalle">
+                <tr>
+                    <td>Cantidad</td>
+                    <td>Id Producto</td>
+                    <td>Precio</td>
+                    <td>Subtotal</td>
+                </tr>
+                <ui:repeat value="#{controladoraHistCompraJSF.detallesUltimos(CasoLogIn.ultimaCompra)}" var="detalle">
                             <tr>
                                 <td><h:outputText value="#{detalle.cantidad}" /></td>
                                 <td><h:outputText value="#{detalle.idProd}" /> </td>
@@ -38,6 +44,12 @@
                                 <td><h:outputText value="#{detalle.subTotal()}" /></td>
                             </tr>
                 </ui:repeat>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>Total:....</td>
+                    <td><h:outputText value="#{controladoraHistCompraJSF.ultimoTotal(CasoLogIn.ultimaCompra)}" /></td>
+                </tr>
             </table>
         </h:form>
     </h:body>
