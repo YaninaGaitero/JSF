@@ -26,7 +26,7 @@ public class carritoDeCompras {
 
     private DatosProductos ConexionProductos;
     private DaoFacturas ConexionCompras;
-    
+
     private int selectProductoID;
     private Producto choose;
     private int cantidadIng;
@@ -62,61 +62,55 @@ public class carritoDeCompras {
                 }
             }
             if (v != null) {
-                getDetalles().remove(v);
+                v.setCantidad(v.getCantidad() + dcadd.getCantidad());
+            } else {
+                getDetalles().add(dcadd);
             }
+        } else {
+            getDetalles().add(dcadd);
         }
-        getDetalles().add(dcadd);
         return answer;
     }
-    
-    public String borrarDetalle(int ProdID)
-    {
-        String answer="carrito";
+
+    public String borrarDetalle(int ProdID) {
+        String answer = "carrito";
         DetalleCompra drop = null;
         Iterator delete = getDetalles().iterator();
-        while (delete.hasNext())
-        {
-            DetalleCompra d = (DetalleCompra)delete.next();
-            if (d.getIdProd()==ProdID)
+        while (delete.hasNext()) {
+            DetalleCompra d = (DetalleCompra) delete.next();
+            if (d.getIdProd() == ProdID) {
                 drop = d;
+            }
         }
-        if (drop!=null)
-        {
+        if (drop != null) {
             getDetalles().remove(drop);
         }
         return answer;
     }
-    
-    public float totalCarrito()
-    {
-        float result=0f;
-        if (!getDetalles().isEmpty())
-        {
+
+    public float totalCarrito() {
+        float result = 0f;
+        if (!getDetalles().isEmpty()) {
             Iterator ite = getDetalles().iterator();
-            while (ite.hasNext())
-            {
-                DetalleCompra dc = (DetalleCompra)ite.next();
-                result += dc.getPrecio()*(dc.getCantidad()*1.0f);
+            while (ite.hasNext()) {
+                DetalleCompra dc = (DetalleCompra) ite.next();
+                result += dc.getPrecio() * (dc.getCantidad() * 1.0f);
             }
         }
         return result;
     }
-    
-    public boolean hayCarrito()
-    {
+
+    public boolean hayCarrito() {
         return !getDetalles().isEmpty();
     }
-    
-    public String confirmarCompra(ControladoraLogin log)
-    {
-        try 
-        {
+
+    public String confirmarCompra(ControladoraLogin log) {
+        try {
             String answer;
             Hashtable detalles = new Hashtable();
             Iterator det = getDetalles().iterator();
-            while (det.hasNext())
-            {
-                DetalleCompra dc = (DetalleCompra)det.next();
+            while (det.hasNext()) {
+                DetalleCompra dc = (DetalleCompra) det.next();
                 detalles.put(dc.getIdProd(), dc);
             }
             int compra;
@@ -124,14 +118,12 @@ public class carritoDeCompras {
             log.setUltimaCompra(compra);
             ConexionCompras.grabaDetalles(detalles, compra);
             return "compra";
-        } 
-        catch (Exception ex) 
-        {
+        } catch (Exception ex) {
             Logger.getLogger(carritoDeCompras.class.getName()).log(Level.SEVERE, null, ex);
             return "failed";
         }
     }
-    
+
     public int getSelectProductoID() {
         return selectProductoID;
     }
