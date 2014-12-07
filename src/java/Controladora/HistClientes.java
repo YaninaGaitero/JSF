@@ -151,6 +151,26 @@ public class HistClientes {
             return 0;
         }
     }
+    
+    public boolean hayFactura()
+    {
+        boolean alfa = false;
+        if (idCompra != 0 || idUsuario != 0)
+        {
+            if (idCompra!=0)
+                alfa = chooseCompra.getIdUsuario()==chooseUser.getId();
+        }
+        return alfa;
+    }
+    
+    public boolean hayComprasRealizadas()
+    {
+        boolean alfa=false;
+        ArrayList verif = listaComprasXUsuario();
+        if (verif!=null)
+            alfa = !verif.isEmpty();
+        return alfa;
+    }
 
     public Usuario getChooseUser() {
         return chooseUser;
