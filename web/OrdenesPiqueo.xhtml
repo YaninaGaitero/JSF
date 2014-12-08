@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Ordenes de Piqueo</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="MenuAdmin.xhtml">
+            <ui:define name="contenido">
+                <h:form rendered="#{CasoLogIn.comun || !CasoLogIn.logged}">
+                    <h1>Usted No Puede Ingresar Aqui. Acceso Denegado.</h1>
+                    <h:commandLink value="Salir" action="failed" />
+                </h:form>
+                <h:panelGroup rendered="#{CasoLogIn.admin}">
+                    <h:form>
+                        
+                        <h:selectManyCheckbox value="#{controladoraPiqueos.selectedCompras}" layout="pageDirection">
+                            <f:selectItems value="#{controladoraPiqueos.listaComprasPend()}"
+                                           var="comprapend"
+                                           
+                                           itemLabel="#{comprapend.fecha}"
+                                           itemValue="#{comprapend.idCompra}" />
+                        </h:selectManyCheckbox>
+                        <br />
+                        <br />
+                        <h:commandLink action="test" value="Seleccionar" />
+                    </h:form>
+                </h:panelGroup>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+
