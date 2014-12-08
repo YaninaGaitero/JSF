@@ -54,6 +54,14 @@
             <from-outcome>clientes</from-outcome>
             <to-view-id>HistorialClientes.xhtml</to-view-id>
         </navigation-case>
+        <navigation-case>
+            <from-outcome>piqueos</from-outcome>
+            <to-view-id>OrdenesPiqueo.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>test</from-outcome>
+            <to-view-id>TestCheckBox.xhtml</to-view-id>
+        </navigation-case>
     </navigation-rule> 
     <managed-bean>
         <managed-bean-name>CasoLogIn</managed-bean-name>
