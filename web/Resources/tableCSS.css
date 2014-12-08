@@ -392,12 +392,3 @@ table.dataTable td {
     text-align: center; }
   .dataTables_wrapper .dataTables_filter {
     margin-top: 0.5em; } }
-
-table.altrowstable {
-font-family: verdana,arial,sans-serif;
-font-size: 11px;
-color: #333333;
-border-width: 1px;
-border-color: #a9c6c9;
-border-collapse: collapse;
-}
