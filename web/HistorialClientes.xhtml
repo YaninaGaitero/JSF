@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="MenuAdmin.xhtml">
+            <ui:define name="contenido">
+                <h:form rendered="#{CasoLogIn.comun || !CasoLogIn.logged}">
+                    <h1>Usted no esta Autorizado.<br />Acceso Denegado.</h1>
+                    <h:commandLink action="failed" value="Salir" />
+                </h:form>
+                <h:form rendered="#{CasoLogIn.admin}">
+                    <h1>Historial de Clientes</h1>
+                    <br />
+                    <br />
+                    <p>Elige Un Usuario</p>
+                    <h:selectOneListbox size="1" value="#{histClientes.idUsuario}">
+                        <f:selectItems value="#{histClientes.listaUsuarios()}"
+                                       var="user"
+                                       itemLabel="#{user.nombre}"
+                                       itemValue="#{user.id}" />
+                        <f:ajax event="click" render="compras" listener="#{histClientes.selectUsuario(E)}" />
+                    </h:selectOneListbox>
+                    <br />
+                    <br />
+                    <h:panelGroup id="compras" layout="block" >
+                        <h:panelGroup id="cond1tru" layout="block" rendered="#{!histClientes.hayComprasRealizadas()}">
+                            <p>El Usuario no ha realizado Compras aun</p>
+                        </h:panelGroup>
+                        <h:panelGroup id="cond2" layout="block"
+                                      rendered="#{histClientes.hayComprasRealizadas()}">
+
+                            <p>Elije Una Compra</p>
+                            <h:selectOneListbox size="1" value="#{histClientes.idCompra}">
+                                <f:selectItems value="#{histClientes.listaComprasXUsuario()}"
+                                               var="comp"
+                                               itemLabel="#{comp.fecha}"
+                                               itemValue="#{comp.idCompra}" />
+                                <f:ajax event="click" render="factura" listener="#{histClientes.selectCompra(E)}" />
+                            </h:selectOneListbox>
+                            <br />
+                            <br />
+                            <h:panelGroup id="factura" layout="block">
+                                <!-- El panelGroup condition sirve para que no renderize la factura en caso de que se cambie
+                                el usuario o si es la primera vez en la sesion que se ingresa a esta pagina-->
+                                <h:panelGroup id="condition" layout="block" rendered="#{histClientes.hayFactura()}">
+                                    <table id="comprafact" border="2">
+                                        <tr>
+                                            <td>Fecha:</td>
+                                            <td><h:outputText value="#{histClientes.chooseCompra.fecha}" /></td>
+                                            <td>Num Fact:</td>
+                                            <td><h:outputText value="#{histClientes.chooseCompra.idCompra}" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Cliente</td>
+                                            <td><h:outputText value="#{histClientes.chooseUser.nombre}" /></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Cantidad</td>
+                                            <td>Producto</td>
+                                            <td>Precio</td>
+                                            <td>Subtotal</td>
+                                        </tr>
+                                        <ui:repeat value="#{histClientes.listaDetallesCompra()}" var="detalle">
+                                            <tr>
+                                                <td><h:outputText value="#{detalle.cantidad}" /></td>
+                                                <td><h:outputText value="#{detalle.idProd}" /> </td>
+                                                <td><h:outputText value="#{detalle.precio}" /></td>
+                                                <td><h:outputText value="#{detalle.subTotal()}" /></td>
+                                            </tr>
+                                        </ui:repeat>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td>Total:....</td>
+                                            <td><h:outputText value="#{histClientes.total()}" /></td>
+                                        </tr>
+                                    </table>
+                                </h:panelGroup>
+                            </h:panelGroup>
+                        </h:panelGroup>
+                    </h:panelGroup>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

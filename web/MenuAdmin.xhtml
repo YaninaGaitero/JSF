@@ -30,36 +30,42 @@
                             </li-->
                         </ul>
                     </li>
+
+                    <li><h:commandLink value="COMPRAR" action="carrito" /></li>
                     <li><h:commandLink value="LOG OUT" action="#{CasoLogIn.logOut()}" /></li>
                 </ul>
 
             </h:form>
 
 
-            <h:form rendered="#{CasoLogIn.comun != true}" class="formulario">
+            <h:form rendered="#{CasoLogIn.admin == true}" class="formulario">
                 <ul class="menu">
                     <li>
                         <h:commandLink value="HOME" action="home" />
                     </li>
+                    <li>
+                        <h:commandLink value="ABM Usuarios" action="abmusers" />
+                    </li>
                     <li><a href="#">COMPRAS</a>
                         <ul class="sub-menu">
-                            <li><h:commandLink value="VER COMPRAS" action="histcompras" /></li>
+                            <li><h:commandLink value="Ver Compras Clientes" action="clientes" /></li>
                         </ul>
                     </li>
                     <li><a href="#">PRODUCTOS</a>
                         <ul class="sub-menu">
-                            <li><h:commandLink value="ALTA" action="altaprod" /></li>
-                        </ul>
-                                                <ul class="sub-menu">
+                            <li><h:commandLink value="ALTA DE PRODUCTOS" action="altaprod" /></li>
                             <li><h:commandLink value="BAJA Y MODIFICACION" action="modifprod" /></li>
                         </ul>
+                    </li>
+                    <li>
+                        <h:commandLink value="Ordenes de Piqueo" action="piqueos" />
                     </li>
                     <li><h:commandLink value="LOG OUT" action="#{CasoLogIn.logOut()}" /></li>
                 </ul>
             </h:form>
         </nav>
-
+        <ui:insert name="contenido" />
     </h:body>
-    
-    <ui:insert name="contenido" />
+
+
 </html>

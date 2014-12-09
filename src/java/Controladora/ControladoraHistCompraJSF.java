@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.faces.event.AjaxBehaviorEvent;
+import javax.faces.event.ValueChangeEvent;
 
 /**
  *
@@ -24,8 +26,8 @@ public class ControladoraHistCompraJSF
 {
 
     DaoFacturas ConexionFacturas;
-    private int IDCompra;
-    private Compra selCompra;
+    private int IDCompra=0;
+    private Compra selCompra=null;
     /**
      * Creates a new instance of ControladoraHistCompraJSF
      * @throws java.lang.Exception
@@ -35,7 +37,7 @@ public class ControladoraHistCompraJSF
         ConexionFacturas = new DaoFacturas();
     }
     
-    public ArrayList CabecerasFact(Usuario cliente)
+    public ArrayList cabecerasFact(Usuario cliente)
     {
         try 
         {
@@ -55,6 +57,8 @@ public class ControladoraHistCompraJSF
         }
     }
     
+    
+    
     public double total()
     {
         try 
@@ -64,6 +68,27 @@ public class ControladoraHistCompraJSF
         } catch (Exception ex) {
             Logger.getLogger(ControladoraHistCompraJSF.class.getName()).log(Level.SEVERE, null, ex);
             return 0;
+        }
+    }
+    
+    public ArrayList detallesFact (int id_client)
+    {
+        try 
+        {
+            ArrayList detalles = new ArrayList();
+            Enumeration elist = ConexionFacturas.TraerDetallesCliente(id_client).elements();
+            while (elist.hasMoreElements())
+            {
+                DetalleCompra add = (DetalleCompra)elist.nextElement();
+                if (add.getIdCompra()==getIDCompra())
+                    detalles.add(add);
+            }
+            return detalles;
+        } 
+        catch (Exception ex) 
+        {
+            Logger.getLogger(ControladoraHistCompraJSF.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
         }
     }
     
@@ -90,16 +115,16 @@ public class ControladoraHistCompraJSF
         }
     }
     
-    public ArrayList DetallesFact (int id_client)
+    public ArrayList detallesUltimos(int idComp)
     {
         try 
         {
             ArrayList detalles = new ArrayList();
-            Enumeration elist = ConexionFacturas.TraerDetallesCliente(id_client).elements();
+            Enumeration elist = ConexionFacturas.TraerDetallesCliente(idComp).elements();
             while (elist.hasMoreElements())
             {
                 DetalleCompra add = (DetalleCompra)elist.nextElement();
-                if (add.getIdCompra()==getIDCompra())
+                if (add.getIdCompra()==idComp)
                     detalles.add(add);
             }
             return detalles;
@@ -110,6 +135,33 @@ public class ControladoraHistCompraJSF
             return null;
         }
     }
+    
+    public Compra ultimaCompra(int ultima)
+    {
+        try 
+        {
+            Compra realizada = ConexionFacturas.traerCompraBYid(ultima);
+            return realizada;
+        } 
+        catch (Exception ex) 
+        {
+            Logger.getLogger(ControladoraHistCompraJSF.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+    
+    public double ultimoTotal(int ultimo)
+    {
+        try 
+        {
+            double result = ConexionFacturas.getTotal(ultimo);
+            return result;
+        } catch (Exception ex) {
+            Logger.getLogger(ControladoraHistCompraJSF.class.getName()).log(Level.SEVERE, null, ex);
+            return 0;
+        }
+    }
+    
 
     public int getIDCompra() {
         return IDCompra;
@@ -125,6 +177,16 @@ public class ControladoraHistCompraJSF
 
     public void setSelCompra(Compra selCompra) {
         this.selCompra = selCompra;
+    }
+   public void selectEvent(AjaxBehaviorEvent E)throws Exception
+    {
+            Enumeration listu = ConexionFacturas.TraerDetallesCliente(IDCompra).elements();
+            while (listu.hasMoreElements())
+            {
+                Compra p = (Compra)listu.nextElement();
+                if (p.getIdCompra()==IDCompra)
+                    setSelCompra(p);
+            }
     }
     
     

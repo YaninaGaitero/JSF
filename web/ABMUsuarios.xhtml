@@ -6,7 +6,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>ABM de Usuarios</title>
-        <link rel="stylesheet" href="Resources/ABMcss.css"/>
+        <link rel="stylesheet" href="Resources/ABMcss.css"/>     
     </h:head>
     <h:body>
         <ui:composition template="MenuAdmin.xhtml">
@@ -17,7 +17,8 @@
                             <h1>Lista de Usuarios</h1>
                             <br />
                             <br />
-                            <h:dataTable border="3" value="#{abmUsuariosJSF.listaUsuarios()}" var="users">
+                            <h:dataTable border="3" 
+                                         value="#{abmUsuariosJSF.listaUsuarios()}" var="users">
                                 <h:column>
                                     <f:facet name="header">
                                         <h:outputText value="ID" />

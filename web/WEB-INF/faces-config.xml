@@ -10,6 +10,10 @@
             <from-outcome>logueado</from-outcome>
             <to-view-id>faces/MenuAdmin.xhtml</to-view-id>
         </navigation-case>
+         <navigation-case>
+            <from-outcome>regis</from-outcome>
+            <to-view-id>faces/Registrarme.xhtml</to-view-id>
+        </navigation-case> 
         <navigation-case>
             <from-outcome>home</from-outcome>
             <to-view-id>faces/Home.xhtml</to-view-id>
@@ -37,6 +41,26 @@
         <navigation-case>
             <from-outcome>abmusers</from-outcome>
             <to-view-id>faces/ABMUsuarios.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>carrito</from-outcome>
+            <to-view-id>Comprar.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>compra</from-outcome>
+            <to-view-id>faces/CompraRealizada.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>clientes</from-outcome>
+            <to-view-id>HistorialClientes.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>piqueos</from-outcome>
+            <to-view-id>OrdenesPiqueo.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>test</from-outcome>
+            <to-view-id>TestCheckBox.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule> 
     <managed-bean>
