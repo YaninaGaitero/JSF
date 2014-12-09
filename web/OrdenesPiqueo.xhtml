@@ -17,7 +17,8 @@
                 <h:panelGroup rendered="#{CasoLogIn.admin}">
                     <h:form>
                         
-                        <h:selectManyCheckbox value="#{controladoraPiqueos.selectedCompras}" layout="pageDirection">
+                        <h:selectManyCheckbox value="#{controladoraPiqueos.selectedCompras}" 
+                                              layout="pageDirection">
                             <f:selectItems value="#{controladoraPiqueos.listaComprasPend()}"
                                            var="comprapend"
                                            
@@ -26,7 +27,7 @@
                         </h:selectManyCheckbox>
                         <br />
                         <br />
-                        <h:commandLink action="test" value="Seleccionar" />
+                        <h:commandLink action="#{controladoraPiqueos.agregarPiqueos()}" value="Seleccionar" />
                     </h:form>
                 </h:panelGroup>
             </ui:define>
