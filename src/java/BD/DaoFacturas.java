@@ -14,6 +14,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Types;
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
@@ -48,6 +49,7 @@ public class DaoFacturas extends BBDD{
         }
         return total;
     }
+    
     
     
     public Hashtable TraerDetallesCliente(int id) throws Exception {
@@ -161,7 +163,7 @@ public class DaoFacturas extends BBDD{
             procedimiento.registerOutParameter("lastID", Types.INTEGER);
             procedimiento.setDate("fec", new java.sql.Date(new java.util.Date().getTime()));
             procedimiento.setInt("usuario", idUsuario);
-            procedimiento.setInt("EST", 1);
+            procedimiento.setInt("est", 1);
             procedimiento.execute();
             ultimaFactura = procedimiento.getInt("lastID");
             procedimiento.close();
@@ -171,16 +173,28 @@ public class DaoFacturas extends BBDD{
         }
     }
 
-    public void GrabarDetalle(int idCom, float precio, Producto Prod, int cantidad) throws Exception {
+    private void GrabarDetalle(int idCom, float precio, int Prod, int cantidad) throws Exception {
         try {
             Conectar();
 
-            String sql = "insert into detallecompra ( id_compra, precio, id_producto, cantidad) values(" + idCom + ", " + precio + ", " + Prod.getId() + ", " + cantidad + ")";
+            String sql = "insert into detallecompra ( id_compra, precio, id_producto, cantidad) values(" + idCom + ", " + precio + ", " + Prod + ", " + cantidad + ")";
             PreparedStatement sent = CrearSentencia(sql);
             Actualizar(sent);
 
         } finally {
             Desconectar();
+        }
+    }
+    public void grabaDetalles(Hashtable detalles, int idCompra) {
+        Enumeration enu = detalles.elements();
+        while (enu.hasMoreElements()) {
+            DetalleCompra aux;
+            aux = (DetalleCompra) enu.nextElement();
+            try {
+                GrabarDetalle(idCompra, aux.getPrecio(), aux.getIdProd(), aux.getCantidad());
+            } catch (Exception ex) {
+                
+            }
         }
     }
 
