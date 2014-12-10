@@ -27,6 +27,9 @@ public class controladoraPiqueos {
     private DaoPiqueo ConexionPiqueos;
     private DaoFacturas ConexionCompras;
     private ArrayList selectedCompras = new ArrayList();
+    private StockError error = new StockError();
+    private piqueoCabecera ultimoPiqueo = null;
+    private ArrayList ultimoDetallesPiqueo = new ArrayList();
 
     /**
      * Creates a new instance of controladoraPiqueos
@@ -86,9 +89,22 @@ public class controladoraPiqueos {
     {
         try 
         {
+            setError(new StockError());
+            ultimoDetallesPiqueo.clear();
             String answer="piqueos";
             Hashtable detallespiqueos = detallesAPiquear();
-            int cabecera = ConexionPiqueos.agregarCompraTopiqueo(detallespiqueos, -1);
+            int cabecera = ConexionPiqueos.agregarCompraTopiqueo(detallespiqueos, -1, getError());
+            if (cabecera!=-1)
+            {
+                answer = "piqueoexito";
+                setUltimoPiqueo(ConexionPiqueos.getbyIDcabPiqueo(cabecera));
+                Enumeration epiq = ConexionPiqueos.traerPiqueoDetalle(cabecera).elements();
+                while (epiq.hasMoreElements())
+                {
+                    Piqueo det = (Piqueo)epiq.nextElement();
+                    getUltimoDetallesPiqueo().add(det);
+                }
+            }
             ConexionPiqueos.cambiarEstadoApreparado(cabecera);
             return answer;
         } catch (Exception ex) 
@@ -96,6 +112,14 @@ public class controladoraPiqueos {
             Logger.getLogger(controladoraPiqueos.class.getName()).log(Level.SEVERE, null, ex);
             return "failed";
         }
+    }
+    
+    public boolean hayMensaje ()
+    {
+        boolean alfa = false;
+        if (getError().getCompra()!=0)
+            alfa = true;
+        return alfa;
     }
 
     public ArrayList getSelectedCompras() {
@@ -105,5 +129,33 @@ public class controladoraPiqueos {
     public void setSelectedCompras(ArrayList selectedCompras) {
         this.selectedCompras = selectedCompras;
     }
+
+    public StockError getError() {
+        return error;
+    }
+
+    public void setError(StockError error) {
+        this.error = error;
+    }
+
+    public piqueoCabecera getUltimoPiqueo() {
+        return ultimoPiqueo;
+    }
+
+    public void setUltimoPiqueo(piqueoCabecera ultimoPiqueo) {
+        this.ultimoPiqueo = ultimoPiqueo;
+    }
+
+    public ArrayList getUltimoDetallesPiqueo() {
+        return ultimoDetallesPiqueo;
+    }
+
+    public void setUltimoDetallesPiqueo(ArrayList ultimoDetallesPiqueo) {
+        this.ultimoDetallesPiqueo = ultimoDetallesPiqueo;
+    }
+
+
+
+
 
 }

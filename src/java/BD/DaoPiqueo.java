@@ -17,7 +17,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Enumeration;
 import java.util.Hashtable;
-
+import Beans.StockError;
 /**
  *
  * @author Yanina
@@ -76,7 +76,7 @@ public class DaoPiqueo extends BBDD {
         }
     }
 
-    private piqueoCabecera getbyIDcabPiqueo(int idPiqueo) throws Exception {
+    public piqueoCabecera getbyIDcabPiqueo(int idPiqueo) throws Exception {
         try {
             Conectar();
             piqueoCabecera piqueoCabecera = null;
@@ -160,7 +160,7 @@ public class DaoPiqueo extends BBDD {
         }
     }
 
-    public int agregarCompraTopiqueo(Hashtable detalle, int grabaCab) throws Exception {
+    public int agregarCompraTopiqueo(Hashtable detalle, int grabaCab, StockError error) throws Exception {
 
         /// recibe por parametro grabaCab -1 si es la primera vez
         // el metodo devuelve -1 si se ejecuto correctamente y (el idCompra si la misma no pudo ser grabada en 3ra posicion 1 si se grabo cabeceray 0 si la cabecera ya estaba grabada)
@@ -189,6 +189,7 @@ public class DaoPiqueo extends BBDD {
         int idPiqueo;
         int rta = 0;
         idPiqueo = maxIdPiqueo() + 1;
+        StockError verif=new StockError();
 
         try {
             Conectar();
@@ -209,14 +210,19 @@ public class DaoPiqueo extends BBDD {
             while (i.hasMoreElements()) {// MODIFICA EL STOCK 
 
                 DetalleCompra aux = (DetalleCompra) i.nextElement();
+                prodDescripcion = daoProd.TraerNombreProducto1(aux.getIdProd());
+                verif.setCompra(aux.getIdCompra());
+                verif.setProducto(prodDescripcion);
+                verif.setStock(aux.getCantidad());
                 psModificaStock = conexion.prepareStatement(updateTableProductos);
                 psModificaStock.setInt(1, aux.getCantidad());
                 psModificaStock.setInt(2, aux.getIdProd());
                 psModificaStock.executeUpdate();
                 psModificaStock.close();
 
-                prodDescripcion = daoProd.TraerNombreProducto1(aux.getIdProd());
+                
                 Piqueo p = getbyIDLineaPiqueo(idPiqueo, aux.getIdProd());// verifica si existe una linea de piqueo con mismo cod de prod e idpPROD
+                
                 if (p == null) {
                     //GRABO PIQUEO YA Q NO EXISTE
                     psInsertaEnPiqueo = conexion.prepareStatement(insertarTablePiqueo);
@@ -255,6 +261,9 @@ public class DaoPiqueo extends BBDD {
             
             conexion.commit();
         } catch (Exception e) {
+            error.setCompra(verif.getCompra());
+            error.setProducto(verif.getProducto());
+            error.setStock(verif.getStock());
             System.out.println(e.getMessage());
             conexion.rollback();
             rta = -1;

@@ -116,6 +116,7 @@ public class carritoDeCompras {
             int compra;
             compra = ConexionCompras.GrabarCompra(log.getUserlog().getId());
             log.setUltimaCompra(compra);
+            getDetalles().clear();
             ConexionCompras.grabaDetalles(detalles, compra);
             return "compra";
         } catch (Exception ex) {

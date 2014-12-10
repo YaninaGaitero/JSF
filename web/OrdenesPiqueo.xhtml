@@ -16,7 +16,7 @@
                 </h:form>
                 <h:panelGroup rendered="#{CasoLogIn.admin}">
                     <h:form>
-                        
+                        <h:outputLabel value="#{controladoraPiqueos.error.toString()}" rendered="#{controladoraPiqueos.hayMensaje()}" />
                         <h:selectManyCheckbox value="#{controladoraPiqueos.selectedCompras}" 
                                               layout="pageDirection">
                             <f:selectItems value="#{controladoraPiqueos.listaComprasPend()}"

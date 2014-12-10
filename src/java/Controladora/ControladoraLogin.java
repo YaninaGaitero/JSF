@@ -4,95 +4,87 @@
  * and open the template in the editor.
  */
 package Controladora;
+
 import Beans.*;
 import BD.*;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
+
 
 /**
  *
  * @author usuario
  */
-public class ControladoraLogin 
-{
+public class ControladoraLogin {
+
     DatosUsuario ConexionUsuarios;
-    
+
     private Usuario userlog;
     private String nombre;
     private String pass;
-    private int UltimaCompra=0;
-    
-    public ControladoraLogin() throws Exception 
-    {
+    private int UltimaCompra = 0;
+
+    public ControladoraLogin() throws Exception {
         this.ConexionUsuarios = new DatosUsuario();
     }
-    
-    public String logIn()
-    {
-        try 
-        {
+
+    public String logIn() {
+        try {
             String answer;
             Hashtable listu = ConexionUsuarios.TrearUsuariosT();
             Enumeration lista = listu.elements();
-            while (lista.hasMoreElements())
-            {
-                Usuario log = (Usuario)lista.nextElement();
-                if (log.getNombre().equals(nombre) && log.getPass().equals(pass))
+            while (lista.hasMoreElements()) {
+                Usuario log = (Usuario) lista.nextElement();
+                if (log.getNombre().equals(nombre) && log.getPass().equals(pass)) {
                     userlog = log;
+                }
             }
-            if (userlog!=null)
-            {
+            if (userlog != null) {
                 answer = "logueado";
-            }
-            else
-            {
+            } else {
                 answer = "failed";
             }
             return answer;
-        } 
-        catch (Exception ex) 
-        {
+        } catch (Exception ex) {
             Logger.getLogger(ControladoraLogin.class.getName()).log(Level.SEVERE, null, ex);
             return "failed";
         }
 
     }
-    
-    public String logOut()
-    {
+
+    public String logOut() {
         userlog = null;
+        UltimaCompra = 0;
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         ConexionUsuarios.Desconectar();
         return "logout";
     }
-    
-    public boolean isLogged()
-    {
+
+    public boolean isLogged() {
         boolean alfa = userlog != null;
         return alfa;
     }
-    
-    public boolean isAdmin()
-    {
-        if (isLogged())
-        {
-            boolean alfa = userlog.getNivel()==1;
+
+    public boolean isAdmin() {
+        if (isLogged()) {
+            boolean alfa = userlog.getNivel() == 1;
             return alfa;
-        }
-        else
+        } else {
             return false;
+        }
     }
-    
-    public boolean isComun()
-    {
-        if (isLogged())
-        {
-            boolean alfa = userlog.getNivel()==2;
+
+    public boolean isComun() {
+        if (isLogged()) {
+            boolean alfa = userlog.getNivel() == 2;
             return alfa;
-        }
-        else
+        } else {
             return false;
+        }
     }
 
     public Usuario getUserlog() {
@@ -122,5 +114,5 @@ public class ControladoraLogin
     public void setUltimaCompra(int UltimaCompra) {
         this.UltimaCompra = UltimaCompra;
     }
-    
+
 }
