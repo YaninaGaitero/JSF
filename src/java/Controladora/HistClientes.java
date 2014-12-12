@@ -166,7 +166,8 @@ public class HistClientes {
     public boolean hayComprasRealizadas()
     {
         boolean alfa=false;
-        ArrayList verif = listaComprasXUsuario();
+        ArrayList verif;
+        verif = listaComprasXUsuario();
         if (verif!=null)
             alfa = !verif.isEmpty();
         return alfa;

@@ -105,4 +105,11 @@ public class Compra {
         }
         return bd;
     }
+
+    @Override
+    public String toString() {
+        return "idCompra=" + idCompra + ", idUsuario=" + idUsuario + ", fecha=" + fecha;
+    }
+   
+   
 }

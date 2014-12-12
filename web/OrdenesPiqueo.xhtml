@@ -22,7 +22,7 @@
                             <f:selectItems value="#{controladoraPiqueos.listaComprasPend()}"
                                            var="comprapend"
                                            
-                                           itemLabel="#{comprapend.fecha}"
+                                           itemLabel="#{comprapend.toString()}"
                                            itemValue="#{comprapend.idCompra}" />
                         </h:selectManyCheckbox>
                         <br />
