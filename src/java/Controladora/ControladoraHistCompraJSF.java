@@ -162,6 +162,18 @@ public class ControladoraHistCompraJSF
         }
     }
     
+    public String descProducto(int id_prod)
+    {
+        String producto="";
+        try {
+            DatosProductos ConexionProductos = new DatosProductos();
+            producto = ConexionProductos.TraerNombreProducto(id_prod);
+            return producto;
+        } catch (Exception ex) {
+            Logger.getLogger(carritoDeCompras.class.getName()).log(Level.SEVERE, null, ex);
+            return producto;
+        }
+    }
 
     public int getIDCompra() {
         return IDCompra;

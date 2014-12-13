@@ -3,14 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/usuario/Desktop/Bruno/Facultad/JSF/src/java/Beans/Compra.java</file>
-            <file>file:/C:/Users/usuario/Desktop/Bruno/Facultad/JSF/src/java/Beans/Piqueo.java</file>
-            <file>file:/C:/Users/usuario/Desktop/Bruno/Facultad/JSF/web/OrdenesPiqueo.xhtml</file>
+            <file>file:/C:/Users/usuario/Desktop/Bruno/Facultad/JSF/web/ABMUsuarios.xhtml</file>
             <file>file:/C:/Users/usuario/Desktop/Bruno/Facultad/JSF/web/WEB-INF/faces-config.xml</file>
+            <file>file:/C:/Users/usuario/Desktop/Bruno/Facultad/JSF/src/java/Controladora/historialPiqueos.java</file>
+            <file>file:/C:/Users/usuario/Desktop/Bruno/Facultad/JSF/src/java/Controladora/abmUsuariosJSF.java</file>
             <file>file:/C:/Users/usuario/Desktop/Bruno/Facultad/JSF/src/java/Controladora/HistClientes.java</file>
-            <file>file:/C:/Users/usuario/Desktop/Bruno/Facultad/JSF/src/java/Controladora/carritoDeCompras.java</file>
-            <file>file:/C:/Users/usuario/Desktop/Bruno/Facultad/JSF/web/PiqueoRealizado.xhtml</file>
-            <file>file:/C:/Users/usuario/Desktop/Bruno/Facultad/JSF/src/java/Controladora/ControladoraLogin.java</file>
+            <file>file:/C:/Users/usuario/Desktop/Bruno/Facultad/JSF/web/MenuAdmin.xhtml</file>
         </group>
     </open-files>
 </project-private>

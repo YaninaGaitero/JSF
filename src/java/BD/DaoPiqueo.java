@@ -114,6 +114,27 @@ public class DaoPiqueo extends BBDD {
         }
     }
 
+    public Hashtable getCabecerasPiqueo() throws Exception 
+    {
+        try {
+            Conectar();
+            piqueoCabecera piqueoCabecera;
+            String sql = "select * from piqueoCabecera where estado = 2 ";
+            PreparedStatement sent = CrearSentencia(sql);
+            ResultSet rows = Consultar(sent);
+            Hashtable listaCab = new Hashtable();
+            while (rows.next()) {
+                int idPiqueo = rows.getInt("idPiqueo");
+                Date fecha = rows.getDate("fecha");
+                piqueoCabecera = new piqueoCabecera(idPiqueo, fecha, 2);
+                listaCab.put(idPiqueo, piqueoCabecera);
+            }
+            return listaCab;
+        } finally {
+            Desconectar();
+        }
+    }
+    
     public Hashtable traerPiqueoDetalle(int idPiqueo) throws Exception {
         Hashtable listaPiqueo = new Hashtable();
         try {

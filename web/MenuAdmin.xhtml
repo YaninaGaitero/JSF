@@ -57,8 +57,11 @@
                             <li><h:commandLink value="BAJA Y MODIFICACION" action="modifprod" /></li>
                         </ul>
                     </li>
-                    <li>
-                        <h:commandLink value="Ordenes de Piqueo" action="piqueos" />
+                    <li><a href="#">PIQUEOS</a>
+                        <ul class="sub-menu">
+                            <li><h:commandLink value="Ordenes de Piqueo" action="piqueos" /></li>
+                            <li><h:commandLink value="Historial de Piqueos" action="histpiqueo" /></li>
+                        </ul>
                     </li>
                     <li><h:commandLink value="LOG OUT" action="#{CasoLogIn.logOut()}" /></li>
                 </ul>

@@ -67,18 +67,19 @@
                             <h4>Orden de compra</h4>
                             <br />
                             <h:dataTable value="#{carritoDeCompras.detalles}" var="detalles" border="1">
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Producto" />
-                                    </f:facet>
-                                    <h:outputText value="#{detalles.idProd}" />
-                                    <f:facet name="footer"/>
-                                </h:column>
+                                
                                 <h:column>
                                     <f:facet name="header">
                                         <h:outputText value="Cantidad" />
                                     </f:facet>
                                     <h:outputText value="#{detalles.cantidad}" />
+                                    <f:facet name="footer"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Producto" />
+                                    </f:facet>
+                                    <h:outputText value="#{carritoDeCompras.descProducto(detalles.idProd)}" />
                                     <f:facet name="footer"/>
                                 </h:column>
                                 <h:column>

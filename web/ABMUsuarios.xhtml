@@ -75,6 +75,7 @@
                         <h:form>
                             <h1>Alta de Usuarios</h1>
                             <br />
+                            <h:messages />
                             <br />
                             <table align="center">
                                 <tr>
@@ -161,55 +162,65 @@
                                                itemValue="#{selUser.id}" />
                                 <f:ajax event="click" listener="#{abmUsuariosJSF.selectUser()}" 
                                         render="namemod apemod dirmod dnimod statemod telmod" />
+                                
                             </h:selectOneListbox>
-                            <table>
-                                <tr>
-                                    <td>Nombre:</td>
-                                    <td>
-                                        <h:inputText id="namemod" value="#{abmUsuariosJSF.modify.nombre}">
-                                        </h:inputText>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Apellido:</td>
-                                    <td>
-                                        <h:inputText id="apemod" value="#{abmUsuariosJSF.modify.apellido}">
-                                        </h:inputText>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Direccion:</td>
-                                    <td>
-                                        <h:inputText id="dirmod" value="#{abmUsuariosJSF.modify.direccion}">
-                                        </h:inputText>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Documento:</td>
-                                    <td>
-                                        <h:inputText id="dnimod" value="#{abmUsuariosJSF.modify.documento}">
-                                            <f:convertNumber integerOnly="true" />
-                                        </h:inputText>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Telefono:</td>
-                                    <td>
-                                        <h:inputText id="telmod" value="#{abmUsuariosJSF.modify.telefono}">
-                                            <f:convertNumber integerOnly="true" />
-                                        </h:inputText>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Estado:</td>
-                                    <td>
-                                        <h:selectOneListbox id="statemod" value="#{abmUsuariosJSF.modify.estado}">
-                                            <f:selectItem itemLabel="Activo" itemValue="1" />
-                                            <f:selectItem itemLabel="Inactivo" itemValue="0" />
-                                        </h:selectOneListbox>
-                                    </td>
-                                </tr>
-                            </table>
+                           
+                                <table>
+                                    <tr>
+                                        <td>Nombre:</td>
+                                        <td>
+                                            <h:inputText id="namemod" value="#{abmUsuariosJSF.modify.nombre}"
+                                                         >
+                                            </h:inputText>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Apellido:</td>
+                                        <td>
+                                            <h:inputText id="apemod" value="#{abmUsuariosJSF.modify.apellido}"
+                                                         >
+                                            </h:inputText>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Direccion:</td>
+                                        <td>
+                                            <h:inputText id="dirmod" value="#{abmUsuariosJSF.modify.direccion}"
+                                                         >
+                                            </h:inputText>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Documento:</td>
+                                        <td>
+                                            <h:inputText id="dnimod" value="#{abmUsuariosJSF.modify.documento}"
+                                                         >
+                                                <f:convertNumber integerOnly="true" />
+                                            </h:inputText>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Telefono:</td>
+                                        <td>
+                                            <h:inputText id="telmod" value="#{abmUsuariosJSF.modify.telefono}"
+                                                         >
+                                                <f:convertNumber integerOnly="true" />
+                                            </h:inputText>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Estado:</td>
+                                        <td>
+                                            <h:selectOneListbox id="statemod" value="#{abmUsuariosJSF.modify.estado}"
+                                                                >
+                                                <f:selectItem itemLabel="Activo" itemValue="1" />
+                                                <f:selectItem itemLabel="Inactivo" itemValue="0" />
+                                            </h:selectOneListbox>
+                                        </td>
+                                    </tr>
+                                </table>
+                            
+
                             <br />
                             <br />
                             <h:commandButton value="Modificar Usuario" action="#{abmUsuariosJSF.modificarUsuario()}" />

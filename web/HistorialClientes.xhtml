@@ -72,7 +72,7 @@
                                         <ui:repeat value="#{histClientes.listaDetallesCompra()}" var="detalle">
                                             <tr>
                                                 <td><h:outputText value="#{detalle.cantidad}" /></td>
-                                                <td><h:outputText value="#{detalle.idProd}" /> </td>
+                                                <td><h:outputText value="#{histClientes.descProducto(detalle.idProd)}" /> </td>
                                                 <td><h:outputText value="#{detalle.precio}" /></td>
                                                 <td><h:outputText value="#{detalle.subTotal()}" /></td>
                                             </tr>

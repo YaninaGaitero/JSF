@@ -25,7 +25,7 @@ public class abmUsuariosJSF {
     DatosUsuario ConexionUsuarios;
     private Usuario Adding = new Usuario();
     private Usuario Modify = new Usuario();
-    private int selectUserID;
+    private int selectUserID=0;
 
     /**
      * Creates a new instance of abmUsuariosJSF

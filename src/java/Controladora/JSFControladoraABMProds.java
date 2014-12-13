@@ -53,7 +53,7 @@ public class JSFControladoraABMProds {
         } 
         catch (Exception ex) 
         {
-            Logger.getLogger(ControladoraABMProds.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JSFControladoraABMProds.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
     }
@@ -65,9 +65,10 @@ public class JSFControladoraABMProds {
             //El Codigo de Ingreso de Productos.
             Producto add = new Producto(0,adding.getNombre(),adding.getDescripcion(),adding.getStock(),adding.getPrecio(),adding.getEstado());
             ConexionProductos.altaProducto(add);
+            setAdding(new Producto());
             return answer;
         } catch (Exception ex) {
-            Logger.getLogger(ControladoraABMProds.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JSFControladoraABMProds.class.getName()).log(Level.SEVERE, null, ex);
             return "failed";
         }
     }
@@ -104,7 +105,7 @@ public class JSFControladoraABMProds {
             return answer;
         } 
         catch (Exception ex) {
-            Logger.getLogger(ControladoraABMProds.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JSFControladoraABMProds.class.getName()).log(Level.SEVERE, null, ex);
             return "failed";
         }
     }

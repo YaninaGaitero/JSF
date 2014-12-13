@@ -124,6 +124,18 @@ public class carritoDeCompras {
             return "failed";
         }
     }
+    
+    public String descProducto(int id_prod)
+    {
+        String producto="";
+        try {
+            producto = ConexionProductos.TraerNombreProducto(id_prod);
+            return producto;
+        } catch (Exception ex) {
+            Logger.getLogger(carritoDeCompras.class.getName()).log(Level.SEVERE, null, ex);
+            return producto;
+        }
+    }
 
     public int getSelectProductoID() {
         return selectProductoID;

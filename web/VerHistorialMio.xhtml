@@ -45,7 +45,7 @@
                             <ui:repeat value="#{controladoraHistCompraJSF.detallesFact(controladoraHistCompraJSF.selCompra.idCompra)}" var="detalle">
                                 <tr>
                                     <td><h:outputText value="#{detalle.cantidad}" /></td>
-                                    <td><h:outputText value="#{detalle.idProd}" /> </td>
+                                    <td><h:outputText value="#{controladoraHistCompraJSF.descProducto(detalle.idProd)}" /> </td>
                                     <td><h:outputText value="#{detalle.precio}" /></td>
                                     <td><h:outputText value="#{detalle.subTotal()}" /></td>
                                 </tr>
