@@ -23,7 +23,7 @@ public class ControladoraLogin {
 
     DatosUsuario ConexionUsuarios;
 
-    private Usuario userlog;
+    private Usuario userlog=null;
     private String nombre;
     private String pass;
     private int UltimaCompra = 0;

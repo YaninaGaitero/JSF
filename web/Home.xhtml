@@ -9,10 +9,11 @@
     <h:body>
         <ui:composition template="MenuAdmin.xhtml">
             <ui:define name="contenido">
-                <h:form rendered="#{!CasoLogIn.logged}">
-                    <h1 align="center">Usted no esta logueado. Acceso Denegado</h1> 
+                <h:form rendered="#{CasoLogIn.isLogged() == false}">
+                    <h1 align="center">Usted no esta logueado. Acceso Denegado</h1>
+                    <h:commandLink action="failed" value="Salir" />
                 </h:form>
-                <h:form rendered="#{CasoLogIn.logged}">
+                <h:form rendered="#{CasoLogIn.isLogged() == true}">
                     <p>Usted se ha logueado.</p>
                 </h:form>
             </ui:define>

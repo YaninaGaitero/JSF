@@ -12,8 +12,9 @@
         <link rel="stylesheet" href="Resources/Menucss.css"/>
     </h:head>
     <h:body>
-        <nav>
-            <h:form rendered="#{CasoLogIn.comun == true}" class="formulario">
+
+        <h:form rendered="#{CasoLogIn.comun == true}" class="formulario">
+            <nav>
                 <ul class="menu">
                     <li>
                         <h:commandLink value="HOME" action="home" />
@@ -34,11 +35,12 @@
                     <li><h:commandLink value="COMPRAR" action="carrito" /></li>
                     <li><h:commandLink value="LOG OUT" action="#{CasoLogIn.logOut()}" /></li>
                 </ul>
+            </nav>
+        </h:form>
 
-            </h:form>
 
-
-            <h:form rendered="#{CasoLogIn.admin == true}" class="formulario">
+        <h:form rendered="#{CasoLogIn.admin == true}" class="formulario">
+            <nav>
                 <ul class="menu">
                     <li>
                         <h:commandLink value="HOME" action="home" />
@@ -65,8 +67,9 @@
                     </li>
                     <li><h:commandLink value="LOG OUT" action="#{CasoLogIn.logOut()}" /></li>
                 </ul>
-            </h:form>
-        </nav>
+            </nav>
+        </h:form>
+
         <ui:insert name="contenido" />
     </h:body>
 
